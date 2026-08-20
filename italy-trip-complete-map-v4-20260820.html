@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>意大利 9 天 8 晚｜佛罗伦萨加强版 V4</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    :root{--ink:#1e293b;--muted:#64748b;--paper:#fffdf9;--line:#e7e5e4;--red:#b91c1c;--green:#047857;--blue:#0369a1;--gold:#b45309}*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.top{background:linear-gradient(120deg,#8f1d21,#cb3d2f);color:#fff;padding:14px 22px}.top h1{font-size:20px;margin:0 0 2px}.top p{margin:0;opacity:.9}.layout{height:calc(100vh - 75px);display:grid;grid-template-columns:minmax(0,1fr) 430px}#map{height:100%;z-index:1}.sidebar{overflow:auto;background:var(--paper);padding-bottom:24px}.notice{margin:12px;padding:11px 12px;border-left:4px solid var(--gold);background:#fff7ed;border-radius:7px;color:#7c2d12;font-size:12px}.research-note{margin:0 12px 12px;padding:9px 10px;border:1px solid #ddd6fe;background:#f5f3ff;border-radius:7px;color:#5b21b6;font-size:11px}.day-section{border-bottom:1px solid var(--line)}button{font:inherit}.day-toggle,.city-toggle,.attraction-toggle{width:100%;border:0;text-align:left;cursor:pointer}.day-toggle{display:flex;align-items:center;justify-content:space-between;background:#7f1d1d;color:#fff;padding:13px 14px;font-weight:700}.day-toggle small{opacity:.85;font-weight:500}.day-body{display:none;padding:10px}.day-section.open .day-body{display:block}.city-panel{border:1px solid var(--line);border-radius:9px;margin:8px 0;overflow:hidden;background:#fff}.city-toggle{background:#f8fafc;padding:10px 11px;font-weight:700;color:#0f172a;display:flex;align-items:center;justify-content:space-between}.city-toggle span{font-size:12px;color:var(--muted);font-weight:500}.city-body{display:none;padding:8px 10px 10px}.city-panel.open .city-body{display:block}.transport-card{margin:8px 0;padding:9px 10px;border-radius:8px;background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a5f;font-size:12px}.transport-card b{display:block;color:var(--blue);font-size:13px;margin-bottom:3px}.transport-card .meta{margin-top:5px;color:#475569}.fastest{margin-top:6px;padding:5px 6px;background:#dbeafe;border-radius:5px;color:#1e40af}.walk-card{margin:8px 0;padding:9px 10px;border-radius:8px;background:#f0fdf4;border:1px solid #86efac;color:#14532d;font-size:12px}.walk-card b{display:block;color:#166534;font-size:13px;margin-bottom:3px}.walk-card span{font-weight:500;color:#15803d}.walk-card small{display:block;margin-top:4px;color:#166534}.meal-card{margin:8px 0;padding:9px 10px;border-radius:8px;background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;font-size:12px}.meal-card>b{display:block;color:#9a3412;font-size:13px;margin-bottom:6px}.meal-list{display:grid;gap:5px}.meal-item{padding:5px 6px;border-radius:5px;background:#fffdfa}.meal-item strong{color:#c2410c}.meal-item small{display:block;color:#9a3412;margin-top:2px}.city-dossier{margin:5px 0 9px;padding:8px 9px;border-radius:7px;background:#fefce8;border:1px solid #fde68a;font-size:11px;color:#713f12}.city-dossier b{display:block;color:#92400e;margin-bottom:3px}.city-dossier ul{padding-left:15px;margin:4px 0}.city-dossier li{margin:3px 0}.hotel-badge{margin:7px 0 9px;padding:9px 10px;border-radius:8px;background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}.hotel-badge b{display:block}.hotel-badge small{display:block;color:#047857;margin-top:2px}.attraction-list{border-top:1px dashed #d6d3d1}.attraction{border-bottom:1px dashed #e7e5e4}.attraction-toggle{background:#fff;padding:9px 0;display:flex;gap:8px;align-items:flex-start}.seq{flex:none;width:21px;height:21px;border-radius:50%;background:#991b1b;color:white;text-align:center;font-size:11px;line-height:21px;margin-top:1px}.attraction.food .seq{background:#c2410c}.attraction .name{font-weight:650;flex:1}.attraction .time{font-size:11px;color:var(--muted);white-space:nowrap}.detail{display:none;padding:0 4px 9px 29px;color:#475569;font-size:12px}.attraction.open .detail{display:block}.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:7px}.guide-grid div{padding:6px;background:#f8fafc;border-radius:5px;font-size:11px}.guide-grid b{display:block;color:#334155;margin-bottom:1px}.guide-grid .wide{grid-column:1/-1;background:#fff7ed;color:#7c2d12}.food-row{margin-top:5px;padding:6px 7px;background:#fff7ed;border-radius:6px;color:#9a3412}.food-row b{color:#c2410c}.legend{position:absolute;z-index:1000;top:15px;right:15px;background:#fff;padding:10px;border-radius:8px;box-shadow:0 2px 10px #0002;font-size:12px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}.hotel-pin{background:#047857;color:#fff;border:3px solid #d1fae5;border-radius:50%;width:28px;height:28px;line-height:22px;text-align:center;font-size:14px;box-shadow:0 1px 4px #0005}.spot-pin{background:#b91c1c;color:#fff;border:2px solid #fff;border-radius:50%;width:22px;height:22px;line-height:18px;text-align:center;font-size:11px;box-shadow:0 1px 4px #0005}.food-pin{background:#7c3aed;color:#fff;border:2px solid #fff;border-radius:50%;width:20px;height:20px;line-height:16px;text-align:center;font-size:10px;box-shadow:0 1px 4px #0005}.food-board{position:absolute;z-index:1000;top:110px;left:15px;width:min(360px,calc(100% - 30px));max-height:calc(100% - 126px);overflow:auto;background:#fffdf9;border:1px solid #fed7aa;border-radius:9px;box-shadow:0 2px 12px #0003}.food-board-head{display:flex;gap:7px;align-items:flex-start;justify-content:space-between;padding:9px 10px;background:#fff7ed;color:#7c2d12}.food-board-head b{display:block;font-size:13px}.food-board-head small{display:block;margin-top:2px;font-size:11px}.food-board-head button{border:1px solid #fdba74;background:#fff;color:#9a3412;border-radius:5px;padding:3px 6px;cursor:pointer;font-size:11px}.food-ranking-list{padding:4px 8px 8px}.rank-city{border-bottom:1px solid #fed7aa}.rank-city:last-child{border-bottom:0}.rank-city summary{cursor:pointer;padding:7px 1px;color:#9a3412;font-weight:700;font-size:12px}.rank-row{display:block;width:100%;border:0;border-radius:6px;background:#fff;text-align:left;padding:5px 6px;margin:0 0 5px;cursor:pointer;color:#431407;font-size:11px}.rank-row:hover{background:#ffedd5}.rank-row b{color:#c2410c}.rank-row small{display:block;color:#9a3412;margin-top:1px}.rank-no{display:inline-block;min-width:18px;height:18px;line-height:18px;text-align:center;margin-right:4px;border-radius:50%;background:#c2410c;color:#fff;font-size:10px}.food-board.collapsed .food-ranking-list{display:none}.food-board.collapsed{max-height:none}.attraction-board{position:absolute;z-index:1000;top:160px;left:15px;width:min(360px,calc(100% - 30px));max-height:calc(100% - 176px);overflow:auto;background:#fffdf9;border:1px solid #fcd34d;border-radius:9px;box-shadow:0 2px 12px #0003}.attraction-board-head{display:flex;gap:7px;align-items:flex-start;justify-content:space-between;padding:9px 10px;background:#fffbeb;color:#92400e}.attraction-board-head b{display:block;font-size:13px}.attraction-board-head small{display:block;margin-top:2px;font-size:11px}.board-toggle{border:1px solid #fbbf24;background:#fff;color:#92400e;border-radius:5px;padding:3px 6px;cursor:pointer;font-size:11px}.attraction-ranking-list{padding:4px 8px 8px}.attraction-rank-city{border-bottom:1px solid #fde68a}.attraction-rank-city:last-child{border-bottom:0}.attraction-rank-city summary{cursor:pointer;padding:7px 1px;color:#92400e;font-weight:700;font-size:12px}.attraction-rank-row{display:block;width:100%;border:0;border-radius:6px;background:#fff;text-align:left;padding:5px 6px;margin:0 0 5px;cursor:pointer;color:#451a03;font-size:11px}.attraction-rank-row:hover{background:#fffbeb}.attraction-rank-row b{color:#92400e}.status-tag{display:inline-block;margin:2px 4px 0 0;padding:1px 4px;border-radius:4px;font-size:10px;font-weight:700}.status-tag.included{background:#fef3c7;color:#92400e}.status-tag.optional{background:#e0f2fe;color:#075985}.status-tag.skipped{background:#e5e7eb;color:#475569}.attraction-rank-meta{display:block;margin-top:2px;color:#92400e}.attraction-rank-pin{width:24px;height:24px;line-height:20px;text-align:center;border-radius:50%;font-size:13px;font-weight:800;box-shadow:0 1px 4px #0005}.attraction-rank-pin.included{background:#d97706;color:#fff;border:2px solid #fef3c7}.attraction-rank-pin.optional{background:#475569;color:#fff;border:2px solid #e0f2fe}.attraction-rank-pin.skipped{background:#fff;color:#64748b;border:2px solid #94a3b8}.board-short-title{display:none}.food-board.collapsed,.attraction-board.collapsed{width:auto;max-height:none;overflow:hidden}.food-board.collapsed .food-ranking-list,.attraction-board.collapsed .attraction-ranking-list{display:none}.food-board.collapsed .board-full-title,.attraction-board.collapsed .board-full-title,.food-board.collapsed small,.attraction-board.collapsed small{display:none}.food-board.collapsed .board-short-title,.attraction-board.collapsed .board-short-title{display:inline}.food-board.collapsed .food-board-head,.attraction-board.collapsed .attraction-board-head{padding:7px 9px;align-items:center}.food-board.collapsed .food-board-head b,.attraction-board.collapsed .attraction-board-head b{white-space:nowrap;font-size:12px}#map[data-open-board="food"] .attraction-board.collapsed,#map[data-open-board="attractions"] .food-board.collapsed{top:auto;bottom:15px}@media(max-width:760px){.layout{display:flex;flex-direction:column;height:auto}#map{height:48vh}.sidebar{height:auto;max-height:none}.top h1{font-size:17px}.food-board{top:105px;max-height:calc(100% - 119px);width:min(320px,calc(100% - 24px));left:12px}.attraction-board{left:12px;top:155px;width:min(320px,calc(100% - 24px));max-height:calc(48vh - 169px)}#map[data-open-board="food"] .attraction-board.collapsed,#map[data-open-board="attractions"] .food-board.collapsed{top:auto;bottom:12px}}
+    .rank-tag{display:inline-block;margin:2px 4px 0 0;padding:1px 4px;border-radius:4px;background:#ede9fe;color:#6d28d9;font-size:10px;font-weight:700}.rank-meta{display:block;margin-top:2px;color:#6b21a8}.intercity-label{pointer-events:auto;white-space:nowrap;transform:translate(-50%,-50%);padding:3px 6px;border:1px solid #93c5fd;border-radius:5px;background:#eff6ff;color:#1d4ed8;font-size:10px;font-weight:700;box-shadow:0 1px 4px #0002}.intercity-label span{margin-right:3px}.legend-toggle{margin-left:4px;padding:1px 4px;border:1px solid #93c5fd;border-radius:4px;background:#fff;color:#1d4ed8;font-size:10px;cursor:pointer}
+    .story-popup{max-width:280px;color:#334155;font-size:12px;line-height:1.45}.story-popup h3{margin:0 0 4px;font-size:14px;color:#7f1d1d}.story-popup .story-city{margin:0 0 7px;color:#64748b;font-size:11px}.story-image-wrap{margin:0 0 7px}.story-image{display:block;width:100%;max-height:150px;object-fit:cover;border-radius:7px;background:#f1f5f9}.story-credit{display:block;margin-top:3px;color:#64748b;font-size:10px}.story-popup p{margin:5px 0}.story-popup b{color:#7c2d12}.story-popup .story-plan{padding:5px 6px;border-radius:5px;background:#fff7ed;color:#7c2d12}.story-open{margin-top:7px;border:1px solid #fca5a5;border-radius:5px;background:#fff1f2;color:#9f1239;padding:4px 6px;cursor:pointer;font-size:11px}.story-teaser{margin-top:6px;padding:6px 7px;border-radius:6px;background:#fff7ed;color:#7c2d12;font-size:11px}.story-teaser b{color:#9a3412}
+    .heritage-board{position:absolute;z-index:1000;top:210px;left:15px;width:min(360px,calc(100% - 30px));max-height:calc(100% - 226px);overflow:auto;background:#f8fafc;border:1px solid #99f6e4;border-radius:9px;box-shadow:0 2px 12px #0003}.heritage-board-head{display:flex;gap:7px;align-items:flex-start;justify-content:space-between;padding:9px 10px;background:#ecfeff;color:#115e59}.heritage-board-head b{display:block;font-size:13px}.heritage-board-head small{display:block;margin-top:2px;font-size:11px}.heritage-list{padding:4px 8px 8px}.heritage-row{display:block;width:100%;border:0;border-radius:6px;background:#fff;text-align:left;padding:6px;margin:0 0 5px;cursor:pointer;color:#134e4a;font-size:11px}.heritage-row:hover{background:#f0fdfa}.heritage-row b{color:#0f766e}.heritage-row small{display:block;margin-top:2px;color:#475569}.heritage-kind{display:inline-block;margin:2px 4px 0 0;padding:1px 4px;border-radius:4px;font-size:10px;font-weight:700}.heritage-kind.cultural{background:#ccfbf1;color:#0f766e}.heritage-kind.natural{background:#dbeafe;color:#1d4ed8}.heritage-kind.landscape{background:#fef3c7;color:#92400e}.heritage-kind.intangible{background:#ede9fe;color:#6d28d9}.heritage-pin{width:26px;height:26px;line-height:22px;text-align:center;border-radius:50%;font-size:13px;font-weight:800;box-shadow:0 1px 4px #0005}.heritage-pin.cultural{background:#0f766e;color:#fff;border:2px solid #ccfbf1}.heritage-pin.natural{background:#2563eb;color:#fff;border:2px solid #dbeafe}.heritage-pin.landscape{background:#a16207;color:#fff;border:2px solid #fef3c7}.heritage-pin.intangible{background:#7c3aed;color:#fff;border:2px solid #ede9fe}.heritage-board.collapsed{width:auto;max-height:none;overflow:hidden}.heritage-board.collapsed .heritage-list,.heritage-board.collapsed .board-full-title,.heritage-board.collapsed small{display:none}.heritage-board.collapsed .board-short-title{display:inline}.heritage-board.collapsed .heritage-board-head{padding:7px 9px;align-items:center}.heritage-board.collapsed .heritage-board-head b{white-space:nowrap;font-size:12px}#map[data-open-board="food"] .attraction-board.collapsed,#map[data-open-board="attractions"] .food-board.collapsed,#map[data-open-board="heritage"] .food-board.collapsed{top:auto;bottom:15px}#map[data-open-board="food"] .heritage-board.collapsed,#map[data-open-board="attractions"] .heritage-board.collapsed,#map[data-open-board="heritage"] .attraction-board.collapsed{top:auto;bottom:53px}@media(max-width:760px){.heritage-board{left:12px;top:205px;width:min(320px,calc(100% - 24px));max-height:calc(48vh - 219px)}#map[data-open-board="food"] .attraction-board.collapsed,#map[data-open-board="attractions"] .food-board.collapsed,#map[data-open-board="heritage"] .food-board.collapsed{bottom:12px}#map[data-open-board="food"] .heritage-board.collapsed,#map[data-open-board="attractions"] .heritage-board.collapsed,#map[data-open-board="heritage"] .attraction-board.collapsed{bottom:50px}}
+  </style>
+</head>
+<body>
+<header class="top"><h1>🇮🇹 意大利 9 天 8 晚｜佛罗伦萨加强版 V4</h1><p>米兰 → 多洛米蒂 → 威尼斯 → 佛罗伦萨(2天) → 托斯卡纳 → 罗马(2天) → 梵蒂冈</p></header>
+<main class="layout"><section id="map" data-open-board=""><div class="legend"><div><span class="dot" style="background:#047857"></span>住宿（★）</div><div><span class="dot" style="background:#b91c1c"></span>景点顺路线</div><div><span class="dot" style="background:#7c3aed"></span>顺路美食</div><div><span class="dot" style="background:#d97706"></span>景点榜：金已排／灰未排</div><div><span class="dot" style="background:#2563eb"></span>跨城交通（蓝色虚线）<button class="legend-toggle" id="intercityToggle" type="button" aria-pressed="true">隐藏</button></div></div><section class="food-board collapsed" id="foodBoard" data-board="food" aria-label="城市非正餐必吃榜"><div class="food-board-head"><div><b><span class="board-full-title">🍴 城市非正餐必吃榜｜每城 10+</span><span class="board-short-title">🍴 美食榜</span></b><small>展开城市会显示该城 10+ 点位；点击店名定位，点位不连线</small></div><button class="board-toggle" type="button" aria-expanded="false">展开</button></div><div class="food-ranking-list" id="foodRankingList"></div></section><section class="attraction-board collapsed" id="attractionBoard" data-board="attractions" aria-label="城市必打卡景点榜"><div class="attraction-board-head"><div><b><span class="board-full-title">★ 城市必打卡景点榜｜每城 Top 10</span><span class="board-short-title">★ 景点榜</span></b><small>展开城市查看已纳入、可选与本次未纳入的取舍</small></div><button class="board-toggle" type="button" aria-expanded="false">展开</button></div><div class="attraction-ranking-list" id="attractionRankingList"></div></section></section><aside class="sidebar"><div class="notice"><b>交通原则：</b>城市间优先火车；多洛米蒂与托斯卡纳优先巴士。仅"皮恩扎 ↔ 丝柏路"建议按需订短途 taxi。票价、班次与开放时间须按出行日期复核。<br><br><b>⚠️ V4 版本更新：</b>佛罗伦萨增加全天深度游（D5），新增学院美术馆/大卫像、米开朗基罗广场日落；罗马压缩为高效精华一日游（D7）+ 梵蒂冈专日（D8）。</div><div class="research-note"><b>攻略交叉核验：</b>已参考 Google 公开检索/地图、携程攻略社区、飞猪目的地与小红书相关公开检索线索。共识是城市段适合火车，奥尔恰谷末段公共交通稀疏；时刻、价格、预约资格均以 Trenitalia、südtirolmobil、AT 与景点官网为准。</div><div id="itinerary"></div></aside></main>
+<script>
+// V4 版本行程数据 - 佛罗伦萨加强版
+const itinerary = [
+ {day:'D1',title:'米兰 · 抵达与休息',cities:[{city:'米兰',hotel:{name:'Hotel Berna（中央站）',lat:45.4847,lng:9.2036,note:'★ 距 Milano Centrale 约3分钟；次日出发和晚到入住都方便。'},stops:[{name:'米兰利纳特机场',time:'22:00',lat:45.4494,lng:9.2763,note:'抵达后直接前往中央站周边酒店。'},{name:'Pizzeria Spontini',time:'23:30',type:'food',lat:45.485,lng:9.204,note:'酒店旁的厚底披萨；若抵达延误，以酒店周边营业餐馆为备选。'}]}]},
+ {day:'D2',title:'米兰全天 → 多洛米蒂（夜间入住）',cities:[{city:'米兰',stops:[{name:'米兰大教堂与拱廊',time:'09:15',lat:45.4642,lng:9.19,note:'从中央站乘 M3 进入市中心；先看广场、拱廊与屋顶预约时段。',food:{name:'Luini',note:'大教堂旁的 Panzerotti；上午看完教堂后顺路外带，避免从 Brera 折返。',lat:45.4663,lng:9.1902}},{name:'斯福尔扎城堡',time:'10:45',lat:45.4705,lng:9.1793,note:'由拱廊向西步行；城堡外观与公园为主，时间充裕再进馆。'},{name:'《最后的晚餐》',time:'12:45',lat:45.4658,lng:9.171,note:'以已订预约时段为准；预留提前30分钟安检与入场。'},{name:'布雷拉艺术区',time:'14:15',lat:45.472,lng:9.188,note:'从修道院向东北进入 Brera；画廊、街区与咖啡馆择一深度体验。'},{name:'Porta Nuova 与垂直森林',time:'16:45',lat:45.4838,lng:9.1897,note:'从 Brera 向北到新城，傍晚看现代天际线；之后向东回 Milano Centrale，不去 Navigli 造成折返。',food:{name:'Eataly Smeraldo（火车前晚餐）',note:'Porta Nuova/Corso Como 一带的多选择晚餐；17:45–18:20 用餐后，乘地铁或出租车直达 Centrale。',lat:45.483,lng:9.1878}}]},{city:'多洛米蒂 · Ortisei',transport:{from:'米兰 Centrale → Bolzano/Bressanone → Ortisei 酒店',mode:'高铁 + 夜间区域巴士',duration:'约4.5–6小时',price:'约€35–75',booking:'Trenitalia / Italo（火车）；südtirolmobil（末段巴士）',note:'固定在 18:30 后离开米兰，完整保留米兰白天；购票时只选能衔接至 Ortisei 的夜间末段班次，到站后直接入住，不再安排游览。',fastest:'优先选择少换乘的晚间高铁至 Bolzano/Bressanone，再接仍可到 Ortisei 的末段巴士；末段若因季节无班，改订该枢纽站旁住宿，不提前牺牲米兰白天。'},hotel:{name:'Ortisei / Val Gardena 民宿或酒店',lat:46.5767,lng:11.6728,note:'★ 缆车与巴士站步行范围内优先；深夜抵达仅办理入住，次日可晚些开始上山。'},stops:[{name:'Ortisei 小镇',time:'深夜入住',lat:46.5767,lng:11.6728,note:'只办理入住、补水与确认次日缆车；深夜不强行找餐厅或补景点。'}]}]},
+ {day:'D3',title:'多洛米蒂（晚起） → 夜间火车到威尼斯',cities:[{city:'多洛米蒂',stops:[{name:'Seceda 刀锋山',time:'10:00',lat:46.605,lng:11.726,note:'晚到后不强行早起；从 Ortisei 乘缆车上山，留足上下山与天气缓冲。',food:{name:'Baita Sofie Hütte（午餐）',note:'Seceda 缆车上山后步行可达的南提洛尔山屋；点 knödel/炖肉，受缆车与天气影响，满座则吃自带补给。',lat:46.607,lng:11.732}},{name:'Santa Maddalena',time:'15:00',lat:46.643,lng:11.735,note:'山区巴士换乘至富内斯山谷；以明信片教堂机位为主，务必倒推离开山谷的班次。'}]},{city:'威尼斯',transport:{from:'Santa Maddalena → Bressanone → 威尼斯',mode:'山区巴士 + 火车到威尼斯',duration:'约5–6.5小时',price:'约€25–60',booking:'südtirolmobil（巴士）；Trenitalia / Italo（火车）',note:'把离开山区放在傍晚，预计夜间抵达；司导非必需，但须按当天巴士与火车衔接执行。'},hotel:{name:'Hotel Antiche Figure（Santa Lucia 站旁）',lat:45.4415,lng:12.321,note:'★ 出火车站约2分钟；夜到可直接入住，次日上午继续游览和离城都省力。'},stops:[{name:'Grand Canal 夜景',time:'夜到后可选',lat:45.4408,lng:12.325,note:'若抵达未过晚且体力允许，只做车站旁轻量夜景；深夜到达则直接休息，不硬塞活动。'}]}]},
+ {day:'D4',title:'威尼斯 → 佛罗伦萨｜美第奇别墅半日',cities:[{city:'威尼斯',stops:[{name:'圣马可广场与总督宫外观',time:'08:00',lat:45.4345,lng:12.3396,note:'把主岛打卡提前到 08:00；广场与总督宫只做外观，给佛罗伦萨的美第奇宫廷线腾出下午。'},{name:'叹息桥 → 里亚托桥',time:'08:40',lat:45.4339,lng:12.3408,note:'按东南到西北快速走桥梁线；各留约20分钟拍照，不排入内参观。'},{name:'Libreria Acqua Alta',time:'09:20',lat:45.4389,lng:12.3432,note:'开门后短停约20分钟；10:00 前离开，All\'Arco 立食后直接回 Santa Lucia 上车。',food:{name:'All\'Arco',note:'靠近里亚托桥的 cicchetti；只立食 15–20 分钟，确保赶上早班高铁。',lat:45.4386,lng:12.3359}}]},{city:'佛罗伦萨',transport:{from:'威尼斯 Santa Lucia → 佛罗伦萨 SMN',mode:'高铁',duration:'约2小时',price:'约€25–65',booking:'Trenitalia（Frecciarossa）/ Italo 官网或 App',note:'改选建议 10:45–11:15 出发的早班高铁，约 12:50–13:20 抵达；先入住酒店，14:30 出发美第奇别墅。',fastest:'早班直达高铁优先；到 SMN 后先回酒店办理入住，晚餐后再深度游。'},hotel:{name:'Hotel Spadai（老城北侧）',lat:43.774,lng:11.249,note:'★ 步行到 SMN 约15分钟、到大教堂约5分钟；D4/D5 连续两晚住宿。'},stops:[{name:'卡雷吉别墅 Villa di Careggi',time:'15:00',lat:43.834,lng:11.25,note:'美第奇家族早期住所，洛伦佐·德·美第奇去世地；约1小时参观。',food:{name:'Vini e Vecchi Sapori（晚餐）',note:'领主广场旁晚餐，需预约或准备替代餐厅。',lat:43.77,lng:11.256}},{name:'卡斯特洛别墅 Villa di Castello',time:'16:30',lat:43.822,lng:11.235,note:'科西莫一世狩猎别墅，拥有最著名的文艺复兴花园；约1.5小时。'},{name:'领主广场与老桥夜景',time:'21:00',lat:43.7696,lng:11.2558,note:'晚餐后免费夜间 Citywalk，连接美第奇公共权力线。'}]}]},
+ {day:'D5',title:'佛罗伦萨全天 · 城市经典深度游 ⭐️ V4新增',cities:[{city:'佛罗伦萨',stops:[{name:'学院美术馆 Galleria dell\'Accademia',time:'09:00',lat:43.7768,lng:11.2585,note:'🌟 V4新增：米开朗基罗《大卫》真迹；提前网上预约，约1.5小时。',food:{name:'Gilli 或 Rivoire（早餐）',note:'历史咖啡馆早餐；cappuccino + 可颂。',lat:43.7702,lng:11.2559}},{name:'圣母百花大教堂',time:'11:00',lat:43.7731,lng:11.256,note:'外观+广场；如欲登顶需提前预约。'},{name:'乌菲兹美术馆',time:'14:00',lat:43.7678,lng:11.2553,note:'🌟 V4充裕时间：波提切利《维纳斯的诞生》、达芬奇作品；约2-2.5小时。',food:{name:'All\'Antico Vinaio（午餐）',note:'著名 schiacciata 三明治；或附近 trattoria。',lat:43.7677,lng:11.2583}},{name:'领主广场 + 佣兵凉廊',time:'16:30',lat:43.7696,lng:11.2558,note:'雕塑广场；大卫像复制品、海神喷泉。'},{name:'老桥 Ponte Vecchio',time:'17:30',lat:43.768,lng:11.253,note:'黄金桥 shops；日落前最佳。'},{name:'米开朗基罗广场 Piazzale Michelangelo',time:'19:00',lat:43.7629,lng:11.2655,note:'🌟 V4新增：佛罗伦萨全景日落；必打卡经典机位。'},{name:'Trattoria ZaZa（晚餐）',time:'20:30',type:'food',lat:43.771,lng:11.255,note:'托斯卡纳牛排/松露意面。'}]}]},
+ {day:'D6',title:'佛罗伦萨 → 托斯卡纳 · 住皮恩扎',cities:[{city:'托斯卡纳',transport:{from:'佛罗伦萨 SMN → Poggibonsi → 圣吉米尼亚诺 → 锡耶纳 → 皮恩扎',mode:'区域火车 + 区域巴士',duration:'约4.5–6小时（含换乘）',price:'约€20–35',booking:'Trenitalia / at-bus.it；请按出行日查询班次',note:'从佛罗伦萨直接南下；Poggibonsi 只作转巴士枢纽，不安排打卡。先留给圣吉米尼亚诺、锡耶纳与皮恩扎；仅皮恩扎到丝柏路用短途 taxi，非全程包车。'},stops:[{name:'圣吉米尼亚诺｜水井广场与塔楼街景',time:'中午',lat:43.4676,lng:11.0435,note:'从 Poggibonsi 转巴士直达；水井广场、Duomo 广场与塔楼外观是核心。若想登 Torre Grossa，至少另留45分钟；D6 只建议外观打卡。',food:{name:'Ristorante Perucà（午餐）',note:'主街附近托斯卡纳午餐；若班次紧张，改 Dondoli gelato + panino 外带，不能为了坐餐厅错过下一段巴士。',lat:43.4677,lng:11.0435}},{name:'锡耶纳｜贝壳广场与市政宫外观',time:'下午',lat:43.3188,lng:11.3308,note:'贝壳广场是锡耶纳最具代表性的核心；市政宫、曼吉亚塔与欢乐之泉均围绕广场，免费外观约20–30分钟。',food:{name:'La Taverna di San Giuseppe（可选短歇）',note:'传统托斯卡纳餐备选；若要赶去皮恩扎，只买 panforte/ricciarelli 带走，不进正餐。',lat:43.3185,lng:11.3316}},{name:'锡耶纳主教堂外观与 Facciatone',time:'16:20',lat:43.3177,lng:11.3288,note:'从贝壳广场向北短走；黑白条纹大教堂外观值得看。登 Facciatone 是高质量观景但需门票与排队，D6 默认不登。'},{name:'皮恩扎｜Pio II 广场、主教堂与主街',time:'傍晚',lat:43.0776,lng:11.6791,note:'皮恩扎是文艺复兴"理想城市"核心；先看 Pio II 广场、主教堂外观、Palazzo Piccolomini 外观，再沿 Corso Rossellino 到城墙观景。',food:{name:'La Buca delle Fate',note:'皮恩扎镇内小餐馆；20:30 后吃 pici 与 Pecorino，订位失败改 La Taverna del Pecorino。',lat:43.0773,lng:11.6781}},{name:'皮恩扎丝柏路（短途 taxi）',time:'日落前视班次',lat:43.0595,lng:11.644,note:'只在抵达足够早、已确认返程司机时前往；这不是公共交通步行段。任何一段公交晚点即删除，保住镇内晚餐与住宿。'},{name:'皮恩扎城墙与主街 · 免费夜间 Citywalk',time:'21:30',lat:43.0776,lng:11.6791,note:'晚餐后沿 Corso Rossellino 与城墙散步，看奥尔恰谷夜景；不再乘车，步行回镇内民宿。'}],hotel:{name:'皮恩扎镇内民宿（公共交通方案）',lat:43.077,lng:11.6786,note:'★ 避免当天再折返佛罗伦萨；次日经 Chiusi 转火车南下。'}}]},
+ {day:'D7',title:'托斯卡纳 → 罗马｜高效精华一日游 🏛️',cities:[{city:'托斯卡纳 · 皮恩扎',stops:[{name:'皮恩扎晨间散步',time:'08:15',lat:43.0769,lng:11.6786,note:'只留约20分钟买奶酪、看主街；随后立刻去巴士点接 Chiusi 的高铁。'}]},{city:'罗马',transport:{from:'皮恩扎 → Chiusi-Chianciano Terme → 罗马 Termini',mode:'区域巴士 + 高铁',duration:'约2–2.5小时',price:'约€25–50',booking:'当地巴士 + Trenitalia / Italo',note:'以 Chiusi 转高铁为主；务必以当日班次为准。'},hotel:{name:'Hotel Diocleziano（Termini）',lat:41.901,lng:12.5,note:'★ 靠近 Termini，适合从托斯卡纳抵达、次日去梵蒂冈和机场。'},stops:[{name:'斗兽场 Colosseo',time:'14:15',lat:41.8902,lng:12.4922,note:'🌟 罗马地标；入内参观约1-1.5小时。建议提前预约。'},{name:'古罗马广场 + 帕拉蒂尼山',time:'15:45',lat:41.8925,lng:12.4853,note:'与斗兽场联票；约1-1.5小时。'},{name:'威尼斯广场/祖国祭坛',time:'17:30',lat:41.8946,lng:12.4832,note:'外观打卡；约15分钟。'},{name:'特雷维喷泉 Trevi Fountain',time:'18:15',lat:41.9009,lng:12.4833,note:'🌟 许愿池；约20分钟。'},{name:'西班牙阶梯 Piazza di Spagna',time:'19:00',lat:41.906,lng:12.4828,note:'🌟 西班牙广场；约20分钟。'},{name:'万神殿 Pantheon',time:'19:45',lat:41.8986,lng:12.4769,note:'🌟 古罗马神庙；外观/入内约20-30分钟。'},{name:'纳沃纳广场 Piazza Navona',time:'21:00',lat:41.8992,lng:12.4731,note:'🌟 四河喷泉；夜间灯光更美。'}]}]},
+ {day:'D8',title:'罗马 → 梵蒂冈｜半日梵蒂冈深度游',cities:[{city:'梵蒂冈',stops:[{name:'梵蒂冈博物馆与西斯廷礼拜堂',time:'08:30',lat:41.9065,lng:12.4536,note:'必须预约，约2.5-3.5小时。'},{name:'圣彼得大教堂与广场',time:'12:00',lat:41.9022,lng:12.4539,note:'教堂开放与安检为实际约束。'},{name:'圣彼得大教堂穹顶',time:'可选',lat:41.9024,lng:12.4535,note:'仅在航班缓冲、体力和排队都充足时。'},{name:'圣天使堡 Castel Sant\'Angelo',time:'可选',lat:41.9031,lng:12.4663,note:'从梵蒂冈步行5分钟；外观或入内约1小时。',food:{name:'Forno Feliziani（早餐）',note:'focaccia/披萨片 + 咖啡',lat:41.9069,lng:12.4574}},{name:'圣母大殿 Santa Maria Maggiore',time:'16:00',lat:41.8983,lng:12.4987,note:'罗马四大圣殿之一；约30分钟。'}]},{city:'罗马',hotel:{name:'Hotel Diocleziano（Termini）',lat:41.901,lng:12.5,note:'★ 靠近 Termini。'},stops:[{name:'Monti 街区夜游',time:'20:30',lat:41.8958,lng:12.4915,note:'罗马最古老街区之一，免费 Citywalk。',food:{name:'Li Rioni a Santiquattro（晚餐）',note:'罗马薄脆披萨',lat:41.893,lng:12.489}}]}]},
+ {day:'D9',title:'罗马 → FCO 返程',cities:[{city:'罗马',stops:[{name:'拉特朗圣若望大殿（可选）',time:'08:30',lat:41.8859,lng:12.5061,note:'如航班较晚可加成；地铁可达。'}]},{city:'FCO 机场',transport:{from:'Roma Termini → Fiumicino Airport',mode:'Leonardo Express',duration:'约32分钟',price:'€14',booking:'Trenitalia App / Termini 自动售票机',note:'请按航班倒推：国际航班通常至少提前2.5–3小时抵达机场。'},stops:[{name:'菲乌米奇诺机场',time:'按航班倒推',lat:41.8003,lng:12.2389,note:'结束行程。'}]}]}
+];
+const dayDates={D1:'2026.09.24 · 周四',D2:'2026.09.25 · 周五',D3:'2026.09.26 · 周六',D4:'2026.09.27 · 周日',D5:'2026.09.28 · 周一',D6:'2026.09.29 · 周二',D7:'2026.09.30 · 周三',D8:'2026.10.01 · 周四',D9:'2026.10.02 · 周五'};
+
+const wikiPage=title=>`https://en.wikipedia.org/wiki/${encodeURIComponent(title).replace(/%20/g,'_')}`;
+const wikiImage={
+ linate:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Terminal_Linate.jpg/330px-Terminal_Linate.jpg',duomo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Milan_Cathedral_from_Piazza_del_Duomo.jpg/330px-Milan_Cathedral_from_Piazza_del_Duomo.jpg',sforza:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/20110725_Castello_Sforzesco_Milan_5557.jpg/330px-20110725_Castello_Sforzesco_Milan_5557.jpg',supper:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg/330px-The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg',brera:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/5275MilanoViaMadonnina.JPG/330px-5275MilanoViaMadonnina.JPG',bosco:'https://upload.wikimedia.org/wikipedia/en/thumb/2/28/Bosco_Verticale_Milano.jpg/330px-Bosco_Verticale_Milano.jpg',ortisei:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Urtij%C3%ABi_cun_l_Sela_Y_Saslonch_da_Tlesura.jpg/330px-Urtij%C3%ABi_cun_l_Sela_Y_Saslonch_da_Tlesura.jpg',canal:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/View_of_the_Grand_Canal_from_Rialto_to_Ca%27Foscari.jpg/330px-View_of_the_Grand_Canal_from_Rialto_to_Ca%27Foscari.jpg',sanmarco:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Piazza_San_Marco_%28Venice%29_at_night-msu-2021-6449-.jpg/330px-Piazza_San_Marco_%28Venice%29_at_night-msu-2021-6449-.jpg',sighs:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Antonio_Contin_-_Ponte_dei_sospiri_%28Venice%29.jpg/330px-Antonio_Contin_-_Ponte_dei_sospiri_%28Venice%29.jpg',rialto:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Rialto_2025_4.jpg/330px-Rialto_2025_4.jpg',acqua:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Libreria_Acqua_Alta_04.jpg/330px-Libreria_Acqua_Alta_04.jpg',uffizi:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Florence%2C_Italy_-_panoramio_%28125%29.jpg/330px-Florence%2C_Italy_-_panoramio_%28125%29.jpg',florence:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Cattedrale_di_Santa_Maria_del_Fiore_%E2%80%93_Il_Duomo_di_Firenze.jpg/330px-Cattedrale_di_Santa_Maria_del_Fiore_%E2%80%93_Il_Duomo_di_Firenze.jpg',pitti:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Palazzo_Pitti_nel_tardo_pomeriggio.jpg/330px-Palazzo_Pitti_nel_tardo_pomeriggio.jpg',boboli:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Jard%C3%ADn_de_B%C3%B3boli%2C_Florencia%2C_Italia%2C_2022-09-19%2C_DD_26.jpg/330px-Jard%C3%ADn_de_B%C3%B3boli%2C_Florencia%2C_Italia%2C_2022-09-19%2C_DD_26.jpg',signoria:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Piazza_Signoria_-_Firenze.jpg/330px-Piazza_Signoria_-_Firenze.jpg',ponte:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Ponte_Vecchio_from_Ponte_alle_Grazie.jpg/330px-Ponte_Vecchio_from_Ponte_alle_Grazie.jpg',arno:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/FirenzeDec092023_01.jpg/330px-FirenzeDec092023_01.jpg',sangimi:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/1_Aerial_pano_san_gimignano_%282%29a.jpg/330px-1_Aerial_pano_san_gimignano_%282%29a.jpg',campo:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Siena5.jpg/330px-Siena5.jpg',siena:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Duomo_di_Siena-9635.jpg/330px-Duomo_di_Siena-9635.jpg',pienza:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Pienza_italy.jpg/330px-Pienza_italy.jpg',orcia:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/I_cipressi_della_Val_D%27Orcia.jpg/330px-I_cipressi_della_Val_D%27Orcia.jpg',colosseum:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/330px-Colosseo_2020.jpg',forum:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Foro_Romano_Musei_Capitolini_Roma.jpg/330px-Foro_Romano_Musei_Capitolini_Roma.jpg',pantheon:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Pantheon_%28Rome%29_-_Right_side_and_front.jpg/330px-Pantheon_%28Rome%29_-_Right_side_and_front.jpg',navona:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Piazza_Navona_%28Rome%29_at_night.jpg/330px-Piazza_Navona_%28Rome%29_at_night.jpg',trevi:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Trevi_Fountain_-_Roma.jpg/330px-Trevi_Fountain_-_Roma.jpg',steps:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Piazza_di_Spagna_%28Rome%29_0004.jpg/330px-Piazza_di_Spagna_%28Rome%29_0004.jpg',trastevere:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Santa_Maria_in_Trastevere_fountain.jpg/330px-Santa_Maria_in_Trastevere_fountain.jpg',sistine:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Sistina-interno.jpg/330px-Sistina-interno.jpg',peter:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/330px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg',fco:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Rome%2C_Italy_ESA24383157_%28cropped%29.jpeg/330px-Rome%2C_Italy_ESA24383157_%28cropped%29.jpeg',academy:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Galleria_degli_Uffizi_01.jpg/330px-Galleria_degli_Uffizi_01.jpg',david:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Michelangelo_David_-_3.jpg/330px-Michelangelo_David_-_3.jpg',michelangelo:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Piazzale_Michelangelo_Firenze.jpg/330px-Piazzale_Michelangelo_Firenze.jpg',careggi:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Villa_di_Careggi_1.jpg/330px-Villa_di_Careggi_1.jpg',castello:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Villa_di_Castello%2C_Florence.jpg/330px-Villa_di_Castello%2C_Florence.jpg',santangelo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Castel_Sant%27Angelo_-_Rome.jpg/330px-Castel_Sant%27Angelo_-_Rome.jpg',venezia:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Vittoriano_-_Roma.jpg/330px-Vittoriano_-_Roma.jpg',maria:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Santa_Maria_Maggiore_2020.jpg/330px-Santa_Maria_Maggiore_2020.jpg',laterano:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Basilica_di_San_Giovanni_in_Laterano_-_Roma.jpg/330px-Basilica_di_San_Giovanni_in_Laterano_-_Roma.jpg'
+};
+const imageProxy=url=>`https://wsrv.nl/?url=${encodeURIComponent(url)}&output=webp&w=560`;
+const attractionStory=(standing,history,highlights,imageUrl,imageAlt,wikiTitle)=>({standing,history,highlights,imageUrl:imageProxy(imageUrl),imageAlt,imageSourceLabel:'Wikimedia Commons / Wikipedia',imageSourceUrl:wikiPage(wikiTitle),sourceLabel:`Wikipedia｜${wikiTitle}`,sourceUrl:wikiPage(wikiTitle)});
+const attractionStories={
+ '米兰利纳特机场':attractionStory('米兰最靠近市区的机场之一','Linate 长期承担米兰市区近距离航空门户的角色，名称来自所在地 Linante。','抵达后它的价值是高效进城：深夜不要把时间花在打卡，优先稳定到中央站住宿。',wikiImage.linate,'米兰利纳特机场航站楼','Milan Linate Airport'),
+ '米兰大教堂与拱廊':attractionStory('米兰的城市门面与伦巴第哥特式地标','大教堂始建于 1386 年，历经数世纪修建；旁边的埃马努埃莱二世拱廊连接主教堂广场与斯卡拉一带。','先看密集尖塔、粉色大理石立面与广场轴线；若预约屋顶，行程才额外进楼。',wikiImage.duomo,'米兰大教堂','Milan Cathedral'),
+ '斯福尔扎城堡':attractionStory('从防御工事到米兰公爵权力象征','15 世纪斯福尔扎家族在旧堡基础上重建，后来成为米兰公国的重要城堡。','本程以城墙、塔楼与公园外观为重点；米开朗基罗《朗达尼尼圣殇》等馆藏留给时间充裕时。',wikiImage.sforza,'斯福尔扎城堡','Sforza Castle'),
+ '《最后的晚餐》':attractionStory('文艺复兴最著名、也最难预约的壁画之一','达·芬奇约 1495–1498 年为 Santa Maria delle Grazie 修道院食堂创作，实验性绘画技法令保存极其脆弱。','看构图中的十二门徒情绪与耶稣居中的透视线；严格按预约、安检和限流时段入场。',wikiImage.supper,'达·芬奇《最后的晚餐》','The Last Supper (Leonardo)'),
+ '布雷拉艺术区':attractionStory('米兰最有代表性的艺术街区之一','"Brera"来自中世纪对空地/草坪的称呼，后来围绕艺术学院与美术馆形成文化核心。','本程把它当作街区漫游：石板路、画廊气氛与咖啡；不再塞进完整美术馆参观。',wikiImage.brera,'布雷拉街景','Brera (district of Milan)'),
+ 'Porta Nuova 与垂直森林':attractionStory('米兰当代城市更新的标志','Porta Nuova 是旧工业/铁路周边的大型更新区；Boeri Studio 设计的 Bosco Verticale 将高层住宅与密集植被结合。','傍晚看新城天际线即可；它在动线上的意义是接近中央站，避免折返去运河区。',wikiImage.bosco,'米兰垂直森林','Bosco Verticale'),
+ 'Ortisei 小镇':attractionStory('Val Gardena 的交通与木雕重镇','Ortisei（德语 St. Ulrich）位于多洛米蒂的 Val Gardena，长期以木雕手工艺和山谷交通枢纽闻名。','本程把它当基地：步行到缆车和巴士，比住偏远山景房更能减少换乘风险。',wikiImage.ortisei,'Ortisei 与多洛米蒂群山','Urtijëi'),
+ 'Seceda 刀锋山':attractionStory('多洛米蒂最具辨识度的锯齿状山脊观景线','Seceda 位于 Odle/Geisler 山群一带，陡峭草坡与白云岩山脊构成经典高山景观。','缆车解决主要爬升；天气、能见度和末班车比"打卡数量"更重要。',wikiImage.ortisei,'Ortisei 与 Seceda 所在的 Val Gardena','Urtijëi'),
+ 'Santa Maddalena':attractionStory('富内斯山谷的明信片机位','Santa Maddalena 位于 Funes 山谷，以教堂、草坡与 Odle 山群组成的景观而闻名。','只走短线到教堂视角，拍完立刻按末班巴士离开；它不是适合无车慢逛一整天的点。',wikiImage.ortisei,'Val Gardena 与多洛米蒂山景（图片示意）','Urtijëi'),
+ 'Grand Canal 夜景':attractionStory('威尼斯最重要的水上主街','大运河呈 S 形穿过主岛，是城市历史上的商业、居住和水运核心。','夜到只看 Santa Lucia 附近的蓝调与水面宫殿倒影；不强行补完整条运河。',wikiImage.canal,'威尼斯大运河','Grand Canal (Venice)'),
+ '圣马可广场与总督宫外观':attractionStory('威尼斯共和国的仪式与政治中心','圣马可广场是威尼斯最重要的公共空间；总督宫长期是总督官邸、政府和司法机关所在地。','清晨从广场轴线看圣马可教堂与粉白哥特立面；本程只拍外观，不排队入宫。',wikiImage.sanmarco,'夜晚的圣马可广场','Piazza San Marco'),
+ '叹息桥 → 里亚托桥':attractionStory('一条串起司法、商业与大运河的威尼斯步行线','叹息桥连接总督宫与新监狱；里亚托桥则是大运河上最古老的桥梁与传统商业节点。','前者看白色巴洛克石桥和运河取景，后者看桥顶与河道视角；两处都只留约 20 分钟。',wikiImage.sighs,'威尼斯叹息桥','Bridge of Sighs'),
+ 'Libreria Acqua Alta':attractionStory('把"水城生活"变成书店装置的独立书店','店主 Luigi Frizzo 于 2002 年开设书店；书与贡多拉、浴缸等陈设结合，也以应对涨潮的趣味方式吸引游客。','把它当 20 分钟的书店小景，不为拍照错过 Santa Lucia 的高铁锚点。',wikiImage.acqua,'Libreria Acqua Alta','Libreria Acqua Alta'),
+ '卡雷吉别墅 Villa di Careggi':attractionStory('美第奇家族政治与文化中心','15世纪的 Careggi 别墅是美第奇家族在佛罗伦萨郊外的重要住所，洛伦佐·德·美第奇在此去世。','欣赏文艺复兴早期别墅建筑与花园，了解美第奇家族的权力根基。',wikiImage.careggi,'卡雷吉别墅','Villa di Careggi'),
+ '卡斯特洛别墅 Villa di Castello':attractionStory('最美文艺复兴花园','16世纪科西莫一世委托建造，拥有意大利最著名的文艺复兴花园之一，喷泉与洞穴精美绝伦。','花园是重点，建议预留1.5小时漫步欣赏对称园艺与喷泉。',wikiImage.castello,'卡斯特洛别墅花园','Villa di Castello'),
+ '学院美术馆 Galleria dell\'Accademia':attractionStory('米开朗基罗《大卫》真迹所在地','1784年成立的美术学院美术馆，最著名的收藏是米开朗基罗的《大卫》原作，以及《囚犯》系列未完成雕塑。','🌟 V4新增必看：大卫像是文艺复兴雕塑的巅峰，建议近距离观察肌肉线条与面部细节；需提前预约。',wikiImage.david,'米开朗基罗《大卫》像','Galleria dell\'Accademia'),
+ '圣母百花大教堂':attractionStory('佛罗伦萨的宗教与市民生活双核心','大教堂 1296 年动工，Brunelleschi 穹顶重塑文艺复兴工程史；共和国广场是城市公共空间的延续。','本程只看外观、穹顶和广场线条约 20 分钟，不加登顶排队。',wikiImage.florence,'佛罗伦萨圣母百花大教堂','Florence Cathedral'),
+ '乌菲兹美术馆':attractionStory('理解美第奇收藏与文艺复兴绘画的核心博物馆','建筑原为科西莫一世委托 Vasari 设计的行政办公空间，后成为美第奇收藏的展示场。','🌟 V4充裕时间：精选看波提切利《维纳斯的诞生》、达·芬奇及美第奇收藏脉络；约2-2.5小时。',wikiImage.uffizi,'佛罗伦萨乌菲兹美术馆','Uffizi'),
+ '领主广场 + 佣兵凉廊':attractionStory('佛罗伦萨共和国权力广场与雕塑群','领主广场面对旧宫，是共和国政治中心；佣兵凉廊展示着包括大卫像复制品在内的著名雕塑。','欣赏海神喷泉、大卫像复制品与周边建筑，感受佛罗伦萨的公共权力空间。',wikiImage.signoria,'佛罗伦萨领主广场','Piazza della Signoria'),
+ '老桥 Ponte Vecchio':attractionStory('阿诺河上的黄金桥','中世纪老桥横跨阿诺河，二战时成为城内少数幸存的桥梁；桥上珠宝 shops 是特色。','日落前看老桥全景最佳，从南岸或米开朗基罗广场回望效果绝佳。',wikiImage.ponte,'佛罗伦萨老桥','Ponte Vecchio'),
+ '米开朗基罗广场 Piazzale Michelangelo':attractionStory('佛罗伦萨全景日落的经典机位','1869年建造的观景广场，以大卫像青铜复制品为标志，是俯瞰佛罗伦萨全城的最佳地点。','🌟 V4新增必打卡：日落前1小时到达，看夕阳染红屋顶与圣母百花大教堂穹顶；带相机和三脚架。',wikiImage.michelangelo,'米开朗基罗广场日落','Piazzale Michelangelo'),
+ '圣吉米尼亚诺｜水井广场与塔楼街景':attractionStory('"中世纪塔楼之城"的浓缩核心','圣吉米尼亚诺的家族塔楼反映中世纪城邦家族竞争，历史中心以保存完整的城市天际线闻名。','水井广场、Duomo 广场和塔楼外观合并短停；登 Torre Grossa 只在巴士缓冲足够时考虑。',wikiImage.sangimi,'圣吉米尼亚诺鸟瞰','San Gimignano'),
+ '锡耶纳｜贝壳广场与市政宫外观':attractionStory('锡耶纳市民身份最强的公共舞台','贝壳广场呈扇形，面对市政宫与曼吉亚塔，也是 Palio 赛马的举行地。','本程花 20–30 分钟看广场地形、宫殿外观和欢乐之泉，不登塔以保证南下。',wikiImage.campo,'锡耶纳贝壳广场','Piazza del Campo'),
+ '锡耶纳主教堂外观与 Facciatone':attractionStory('意大利哥特建筑与"未完成大教堂"雄心的见证','锡耶纳主教堂以黑白条纹大理石著称；Facciatone 是 14 世纪扩建计划中未完成的立面遗存。','本程看外观与建筑故事即可，登 Facciatone 需另留排队和门票时间。',wikiImage.siena,'锡耶纳主教堂','Siena Cathedral'),
+ '皮恩扎｜Pio II 广场、主教堂与主街':attractionStory('文艺复兴"理想城市"的标本','教皇庇护二世将故乡 Corsignano 重塑为 Pienza，Pio II 广场、主教堂与 Piccolomini 宫共同展示早期规划理念。','把广场、主教堂外观、主街和城墙视野连续完成，别拆成多段折返。',wikiImage.pienza,'托斯卡纳皮恩扎','Pienza'),
+ '皮恩扎丝柏路（短途 taxi）':attractionStory('奥尔恰谷被摄影与电影不断强化的景观符号','Val d\'Orcia 的丘陵、农庄与丝柏路展现长期耕作塑造的托斯卡纳文化景观。','它不是公共交通步行段：仅在抵达早且已确认返程 taxi 时去，否则删掉不影响皮恩扎核心。',wikiImage.orcia,'奥尔恰谷丝柏景观','Val d\'Orcia'),
+ '斗兽场 Colosseo':attractionStory('古罗马帝国最具辨识度的公共娱乐建筑','弗拉维王朝于 1 世纪兴建的巨型圆形剧场，可容纳大量观众观看角斗、狩猎等活动。','🌟 罗马精华一日游核心；按预约时段入场，重点看椭圆结构、看台与地下空间的组织。',wikiImage.colosseum,'罗马斗兽场','Colosseum'),
+ '古罗马广场 + 帕拉蒂尼山':attractionStory('共和国政治中心与帝国宫殿高地的组合','Forum Romanum 是古罗马政治、宗教和商业生活中心；帕拉蒂尼山后来聚集帝国宫殿。','与斗兽场连续走，不重复安检；优先看主轴、凯旋门和俯瞰广场的层次。',wikiImage.forum,'古罗马广场','Roman Forum'),
+ '威尼斯广场/祖国祭坛':attractionStory('罗马市中心的大型纪念性广场',' Piazza Venezia 以威尼斯宫命名，祖国祭坛（Vittoriano）是统一意大利的纪念建筑。','外观打卡即可，白色大理石建筑在阳光下很醒目。',wikiImage.venezia,'威尼斯广场与祖国祭坛','Piazza Venezia'),
+ '特雷维喷泉 Trevi Fountain':attractionStory('18世纪巴洛克喷泉杰作','1762年完成的许愿池是罗马最著名的喷泉，传说投币可保证重返罗马。','🌟 必打卡：日落后各留约 20 分钟拍照；投币许愿是传统。',wikiImage.trevi,'罗马许愿池','Trevi Fountain'),
+ '西班牙阶梯 Piazza di Spagna':attractionStory('罗马最具代表性的城市舞台之一','西班牙阶梯连接 Piazza di Spagna 与 Trinità dei Monti 教堂，是罗马最著名的户外阶梯。','🌟 必打卡：坐在阶梯上或从下方仰拍是经典机位；附近是购物区。',wikiImage.steps,'罗马西班牙阶梯','Spanish Steps'),
+ '万神殿 Pantheon':attractionStory('古罗马建筑的巅峰之作','公元2世纪建成的古罗马神庙，以其巨大的混凝土穹顶和中央圆孔（oculus）闻名。','🌟 必打卡：穹顶是古代世界最大的无支撑混凝土穹顶；免费开放，但需排队。',wikiImage.pantheon,'罗马万神殿','Pantheon, Rome'),
+ '纳沃纳广场 Piazza Navona':attractionStory('罗马最美丽的巴洛克广场','原古罗马竞技场遗址，现在以贝尼尼的四河喷泉为中心，是罗马最优雅的广场。','🌟 必打卡：夜间灯光下的四河喷泉格外美丽；周边餐厅适合晚餐。',wikiImage.navona,'罗马纳沃纳广场','Piazza Navona'),
+ '梵蒂冈博物馆与西斯廷礼拜堂':attractionStory('教廷数百年收藏与文艺复兴壁画的高密度核心','梵蒂冈博物馆汇集教廷长期收藏；西斯廷礼拜堂由教皇 Sixtus IV 兴建，米开朗基罗的天顶画与《最后的审判》是重心。','必须预约，按 2.5-3.5小时精选动线走；西斯廷礼拜堂是博物馆动线的终点。',wikiImage.sistine,'西斯廷礼拜堂内部','Sistine Chapel'),
+ '圣彼得大教堂与广场':attractionStory('天主教世界的象征性中心之一','现有圣彼得大教堂为文艺复兴时期重建，Bramante、Michelangelo 等多人参与；广场由 Bernini 设计。','先通过安检看教堂与广场；登穹顶只在体力、排队和航班缓冲均充足时再加。',wikiImage.peter,'梵蒂冈圣彼得大教堂','St. Peter\'s Basilica'),
+ '圣天使堡 Castel Sant\'Angelo':attractionStory('哈德良皇帝的陵墓与教皇堡垒','公元2世纪哈德良皇帝建造的陵墓，后成为教皇堡垒与避难所，连接梵蒂冈的秘密通道（Passetto）著名。','从梵蒂冈步行5分钟；外观或入内约1小时；天台视野极佳。',wikiImage.santangelo,'圣天使堡','Castel Sant\'Angelo'),
+ '圣母大殿 Santa Maria Maggiore':attractionStory('罗马四大圣殿之一','公元5世纪始建的罗马最大圣母教堂，拥有精美的早期基督教马赛克镶嵌画。','🌟 四大圣殿之一；外观宏伟，内部马赛克极精美；靠近 Termini。',wikiImage.maria,'罗马圣母大殿','Santa Maria Maggiore'),
+ '拉特朗圣若望大殿':attractionStory('罗马主教座堂，天主教母堂','罗马四大圣殿之首，教皇官方主教座堂；巴洛克风格，天花板镀金。','D9 可选补充；地铁可达，是罗马重要的宗教圣地。',wikiImage.laterano,'拉特朗圣若望大殿','Archbasilica of Saint John Lateran'),
+ '菲乌米奇诺机场':attractionStory('罗马国际航班的主要门户','Rome Fiumicino Leonardo da Vinci Airport 服务罗马及周边，是行程最后的交通节点。','它不是观光点：按国际航班倒推，先把托运、退税和安检缓冲留足。',wikiImage.fco,'罗马菲乌米奇诺机场','Rome Fiumicino Airport')
+};
+const startTransport={
+ D1:{label:'当日出发交通',from:'利纳特机场 → Hotel Berna',mode:'机场正规出租车',duration:'约25–35分钟',price:'约€25–35',booking:'机场出租车站 / 正规叫车 App',note:'深夜抵达优先直达酒店，不再为了餐厅绕行。',fastest:'深夜班次不稳定时，出租车通常比机场巴士更快。'},
+ D2:{label:'当日出发交通',from:'Hotel Berna → 米兰大教堂',mode:'M3 地铁 + 步行',duration:'约12–18分钟',price:'约€2.20',booking:'ATM Milano App / 地铁自动售票机',note:'09:00 后从 Centrale FS 到 Duomo，出站即到广场；D2 完整游览米兰，18:30 后才去多洛米蒂。',fastest:'市中心早高峰后下地铁通常快于出租车；晚间离城前从 Porta Nuova 直达 Centrale。'},
+ D3:{label:'当日出发交通',from:'Ortisei 住宿 → Seceda 缆车站',mode:'步行 + 缆车',duration:'约10–20分钟到登山口',price:'缆车票季节浮动',booking:'缆车官网 / 现场窗口',note:'深夜入住后，10:00 左右再从镇中心出发；天气不佳先核对运营状态。',fastest:'不绕去其他山谷，直接上 Seceda 是当天最省时的起点；不用为早班缆车压缩休息。'},
+ D4:{label:'当日出发交通',from:'Hotel Antiche Figure → 圣马可广场',mode:'步行（必要时水上巴士）',duration:'步行约30–35分钟',price:'步行免费；水上巴士单次票价浮动',booking:'步行无需购票；水上巴士用 ACTV App/售票机',note:'07:30 左右离开酒店、08:00 到圣马可；行李寄存在酒店，10:00 前结束主岛短线并回 Santa Lucia。',fastest:'若脚程或潮汐影响步行，改水上巴士回 Santa Lucia；10:45–11:15 高铁是佛罗伦萨美第奇宫廷线的硬锚点。'},
+ D5:{label:'当日出发交通',from:'Hotel Spadai → 学院美术馆',mode:'步行',duration:'约15–20分钟',price:'免费',booking:'无需购票',note:'V4新增D5佛罗伦萨全天深度游；从酒店步行至学院美术馆开始一日游。',fastest:'老城步行最方便，景点之间步行可达。'},
+ D6:{label:'当日出发交通',from:'Hotel Spadai → Firenze SMN',mode:'步行',duration:'约11–15分钟',price:'免费',booking:'无需购票',note:'早餐后直接进站坐早班区间火车，不在佛罗伦萨市内绕路。',fastest:'酒店位置本身就是优势，步行比等公交更快。'},
+ D7:{label:'当日出发交通',from:'皮恩扎住宿 → 当地巴士停靠点',mode:'步行',duration:'约8–15分钟',price:'免费',booking:'无需购票',note:'先确认去 Chiusi 的首班区域巴士；若错过班次，考虑短途 taxi 到 Chiusi。',fastest:'当天南下的瓶颈在巴士班次，先早出发而非早逛街。'},
+ D8:{label:'当日出发交通',from:'Hotel Diocleziano → 梵蒂冈博物馆',mode:'步行至 Termini + 地铁 A 线',duration:'约25–35分钟',price:'单程票价按 ATAC 当日标准',booking:'ATAC App / Termini 自动售票机',note:'Ottaviano 站下车后步行去博物馆入口；不要误从圣彼得广场进博物馆。',fastest:'地铁 A 线少受市区拥堵影响，优先于出租车。'},
+ D9:{label:'当日出发交通',from:'Hotel Diocleziano → FCO',mode:'Leonardo Express',duration:'约32分钟',price:'€14',booking:'Trenitalia App / Termini 自动售票机',note:'按航班倒推出发时间；国际航班预留至少2.5–3小时机场缓冲。',fastest:'Leonardo Express 直达，比出租车更可靠。'}
+};
+
+const intercityRoutes=[
+ {day:'D1',from:'米兰利纳特机场',to:'Milano Centrale / Hotel Berna',mode:'机场出租车',modeShort:'出租车',depart:'22:10 后取行李即走',arrive:'约22:40–23:00',duration:'约25–35分钟',price:'约€25–35',risk:'深夜航班延误会直接压缩宵夜；只走机场正规出租车队列或正规叫车 App。',booking:'Milano Airports｜官方机场交通说明',bookingUrl:'https://www.milanolinate-airport.com/en/transport/',path:[[45.4494,9.2763],[45.4847,9.2036]],labelLocation:[45.468,9.239]},
+ {day:'D2',from:'Milano Centrale',to:'Ortisei',mode:'高铁 + 夜间区域巴士',modeShort:'火车＋巴士',depart:'建议 18:30–19:00',arrive:'约23:30–00:30',duration:'约4.5–6小时',price:'约€35–75',risk:'最后一段进山巴士有季节性/末班风险；先锁定可衔接的末段，再买火车。',booking:'Trenitalia / Italo；südtirolmobil',bookingUrl:'https://www.trenitalia.com/en.html',path:[[45.4848,9.2042],[46.4983,11.3548],[46.5767,11.6728]],labelLocation:[46.15,10.65]},
+ {day:'D3',from:'Santa Maddalena',to:'Venezia Santa Lucia',mode:'山区巴士 + 火车',modeShort:'巴士＋火车',depart:'建议 17:00 左右',arrive:'约22:30–23:30',duration:'约5–6.5小时',price:'约€25–60',risk:'富内斯山谷末班与 Bressanone 接车的衔接最脆弱；天气/拍照延误就删减 Santa Maddalena。',booking:'südtirolmobil；Trenitalia / Italo',bookingUrl:'https://www.suedtirolmobil.info/en/',path:[[46.643,11.735],[46.715,11.656],[45.4415,12.321]],labelLocation:[46.1,11.95]},
+ {day:'D4',from:'Venezia Santa Lucia',to:'Firenze SMN',mode:'高铁',modeShort:'高铁',depart:'建议 10:45–11:15',arrive:'约12:50–13:20',duration:'约2小时',price:'约€25–65',risk:'这是 D4 美第奇别墅线的时间锚点；晚于 11:15 到达会压缩别墅参观。',booking:'Trenitalia Frecciarossa / Italo',bookingUrl:'https://www.trenitalia.com/en.html',path:[[45.4415,12.321],[43.7765,11.248]],labelLocation:[44.6,11.8]},
+ {day:'D6',from:'Firenze SMN',to:'Poggibonsi',mode:'区域火车',modeShort:'区域火车',depart:'建议 08:00',arrive:'约09:00',duration:'约55–70分钟',price:'约€8–12',risk:'此处只是换乘枢纽；预留站内找巴士站与检票时间，不安排打卡。',booking:'Trenitalia',bookingUrl:'https://www.trenitalia.com/en.html',path:[[43.7765,11.248],[43.4707,11.148]],labelLocation:[43.62,11.2]},
+ {day:'D6',from:'Poggibonsi',to:'San Gimignano',mode:'区域巴士',modeShort:'区域巴士',depart:'建议 09:20',arrive:'约09:50',duration:'约25–35分钟',price:'约€3–5',risk:'班次低频且巴士站可能与火车站不在同一入口；落地当天复核 AT 实时信息。',booking:'Autolinee Toscane（AT）',bookingUrl:'https://www.at-bus.it/en',path:[[43.4707,11.148],[43.4676,11.0435]],labelLocation:[43.47,11.095]},
+ {day:'D6',from:'San Gimignano',to:'Siena',mode:'区域巴士（经 Poggibonsi）',modeShort:'区域巴士',depart:'建议 13:15',arrive:'约14:45–15:10',duration:'约1.5–2小时',price:'约€6–10',risk:'通常需要回 Poggibonsi 转乘；若错过衔接，优先执行"锡耶纳过夜"回退，不硬赶皮恩扎。',booking:'Autolinee Toscane（AT）',bookingUrl:'https://www.at-bus.it/en',path:[[43.4676,11.0435],[43.4707,11.148],[43.3188,11.3308]],labelLocation:[43.4,11.2]},
+ {day:'D6',from:'Siena',to:'Pienza',mode:'区域巴士',modeShort:'区域巴士',depart:'建议 17:30',arrive:'约18:40–19:00',duration:'约1–1.5小时',price:'约€7–12',risk:'这是 D6 最关键的末段；晚班稀少，前一段稍有延误即不建议再去丝柏路。',booking:'Autolinee Toscane（AT）',bookingUrl:'https://www.at-bus.it/en',path:[[43.3188,11.3308],[43.0776,11.6791]],labelLocation:[43.2,11.5]},
+ {day:'D7',from:'Pienza',to:'Roma Termini',mode:'区域巴士 + 高铁（Chiusi 换乘）',modeShort:'巴士＋高铁',depart:'建议 09:00',arrive:'约12:00–12:30',duration:'约2–2.5小时',price:'约€25–50',risk:'皮恩扎→Chiusi 是全程瓶颈；首班错过就用短途 taxi 接 Chiusi，别临时包整天车。',booking:'Trenitalia；当地巴士按出行日核验',bookingUrl:'https://www.trenitalia.com/en.html',path:[[43.0776,11.6791],[42.9545,11.8806],[41.901,12.5]],labelLocation:[42.4,12.2]},
+ {day:'D9',from:'梵蒂冈 / Ottaviano',to:'Fiumicino Airport（FCO）',mode:'地铁 A 线 + Leonardo Express',modeShort:'地铁＋机场快线',depart:'建议 10:00（按航班倒推）',arrive:'约11:00–11:30',duration:'约60–90分钟',price:'约€15.50 起（地铁 + Leonardo Express）',risk:'须为国际航班保留至少 2.5–3 小时机场缓冲；勿把博物馆/登顶排到上车前。',booking:'ATAC；Trenitalia Leonardo Express',bookingUrl:'https://www.trenitalia.com/en.html',path:[[41.9065,12.4536],[41.901,12.5],[41.8003,12.2389]],labelLocation:[41.84,12.36]}
+];
+
+const transportDistances={
+ '利纳特机场 → Hotel Berna':'约7 km（道路）','Hotel Berna → 米兰大教堂':'约3 km（地铁＋步行）','Ortisei 住宿 → Seceda 缆车站':'约1 km（步行）','Hotel Antiche Figure → 圣马可广场':'约2 km（步行）','Hotel Spadai → 学院美术馆':'约1.5 km（步行）','Hotel Spadai → Firenze SMN':'约1 km（步行）','皮恩扎住宿 → 当地巴士停靠点':'约0.8 km（步行）','Hotel Diocleziano → 梵蒂冈博物馆':'约4.5 km（地铁＋步行）','Hotel Diocleziano → FCO':'约32 km（铁路）',
+ '米兰 Centrale → Bolzano/Bressanone → Ortisei 酒店':'约290 km（铁路＋道路）','Santa Maddalena → Bressanone → 威尼斯':'约310 km（道路＋铁路）','威尼斯 Santa Lucia → 佛罗伦萨 SMN':'约260 km（铁路）','佛罗伦萨 SMN → Poggibonsi → 圣吉米尼亚诺 → 锡耶纳 → 皮恩扎':'约180 km（铁路＋道路）','皮恩扎 → Chiusi-Chianciano Terme → 罗马':'约200 km（道路＋铁路）','Roma Termini → Fiumicino Airport':'约32 km（铁路）'
+};
+
+function attachTransportDistances(){const records=[...Object.values(startTransport),...itinerary.flatMap(day=>day.cities.map(city=>city.transport).filter(Boolean)),...intercityRoutes];records.forEach(record=>{const key=record.to?`${record.from} → ${record.to}`:record.from;record.distance=transportDistances[key];if(!record.distance)record.distance='参考地图距离';})}
+attachTransportDistances();
+const walkPlans={
+ D1:{target:'约1–2 km',limit:'3 km',segments:'机场到酒店用车；仅酒店周边宵夜短走。',relief:'深夜抵达不加 Citywalk，行李全程随车。'},
+ D2:{target:'约9–10 km',limit:'11 km',segments:'中央站→Duomo→城堡→最后的晚餐→Brera→Porta Nuova；每段间穿插地铁/短休。',relief:'城堡仅外观20分钟；Brera 到 Porta Nuova 觉得累时直接乘 M2/M3，不步行硬撑。'},
+ D3:{target:'约6–8 km',limit:'10 km',segments:'缆车承担爬升；Seceda 与 Santa Maddalena 只做短线观景、拍照。',relief:'这是山地步行而非城市暴走；风雨、疲劳或末班压力出现时删 Santa Maddalena。'},
+ D4:{target:'约7–8 km',limit:'10 km',segments:'威尼斯约3–4 km；佛罗伦萨美第奇别墅半日约2–3 km，晚上老城夜景约2 km。',relief:'美第奇别墅需要打车；威尼斯回站可用水上巴士，不硬走。'},
+ D5:{target:'约10–12 km',limit:'14 km',segments:'学院美术馆→大教堂→乌菲兹→领主广场→老桥→米开朗基罗广场；V4新增全天深度游。',relief:'米开朗基罗广场是上坡，可选择公交上山；疲劳时删减大教堂登顶或乌菲兹深度。'},
+ D6:{target:'约7–9 km',limit:'11 km',segments:'Poggibonsi 只换乘；圣吉米尼亚诺、锡耶纳、皮恩扎均为短打卡，跨城全靠火车/巴士。',relief:'丝柏路只用短途 taxi，不能为了机位徒步；公交延误时直接删丝柏路。'},
+ D7:{target:'约10–12 km',limit:'14 km',segments:'罗马精华一日游：斗兽场/广场→威尼斯广场→许愿池→西班牙阶梯→万神殿→纳沃纳广场。',relief:'V4罗马压缩版：经典Citywalk路线，各景点之间步行约5-15分钟；疲劳时删减 optional 景点。'},
+ D8:{target:'约6–8 km',limit:'10 km',segments:'梵蒂冈博物馆→圣彼得大教堂→可选圣天使堡→圣母大殿；地铁+步行。',relief:'梵蒂冈博物馆内步行多，穿舒适鞋；赶航班时删穹顶登顶。'},
+ D9:{target:'约2–3 km',limit:'5 km',segments:'可选拉特朗圣若望大殿+去机场；其余由 Leonardo Express 完成。',relief:'赶航班时删所有景点，直接去 Termini。'}
+};
+
+const mealPlans={
+ D1:[{slot:'宵夜｜23:30',city:'米兰 Centrale',place:'Pizzeria Spontini',dish:'厚底切片披萨',note:'酒店旁的抵达餐；航班延误或售罄时，直接改酒店周边仍营业餐馆。'}],
+ D2:[{slot:'早餐｜08:30',city:'中央站/酒店',place:'Hotel Berna 早餐',dish:'咖啡 + 轻早餐',note:'不要吃太撑，给 Luini 与晚间火车前晚餐留胃口。'},{slot:'午餐｜11:45（20分钟）',city:'Duomo',place:'Luini',dish:'panzerotto（番茄芝士/蔬菜）',note:'公开攻略与小红书高频的米兰快餐；外带边走边吃，避开《最后的晚餐》预约。'},{slot:'晚餐｜17:45–18:20',city:'Porta Nuova',place:'Eataly Milano Smeraldo',dish:'risotto alla Milanese / cotoletta 二选一',note:'距 Centrale 近、选择多；固定在18:30离城前，排队则改同楼的快速柜台。'}],
+ D3:[{slot:'早餐｜09:15',city:'Ortisei',place:'住宿/镇中心 bar',dish:'cappuccino + strudel',note:'深夜入住后的轻早餐；不为早餐延误10:00缆车。'},{slot:'午餐｜12:30–13:15',city:'Seceda',place:'Baita Sofie Hütte',dish:'南提洛尔山屋菜、knödel 或炖肉',note:'小红书高频山顶餐；需随缆车运营，满座/天气差则以自带 Speck 三明治为备选。'},{slot:'沿途小吃｜16:30',city:'回程巴士/火车',place:'Ortisei 面包店或超市',dish:'Speck、Pecorino、苹果汁',note:'把晚餐改为可携带补给，夜抵威尼斯不赌餐厅营业。'}],
+ D4:[{slot:'早午餐｜10:00（15–20分钟）',city:'威尼斯 Rialto',place:'All\'Arco',dish:'cicchetti + ombra/spritz',note:'桥梁 Citywalk 结束后立食小点；10:20 前离开，确保 Santa Lucia 早班高铁。'},{slot:'午餐｜13:30',city:'佛罗伦萨',place:'酒店附近简餐',dish:'快速午餐',note:'办理入住后简餐，为美第奇别墅留出完整下午。'},{slot:'晚餐｜19:30',city:'领主广场',place:'Vini e Vecchi Sapori',dish:'托斯卡纳前菜 + pasta/牛排按人数点',note:'需要预约；无位时选择附近 trattoria，晚餐后22:00河岸短走。'}],
+ D5:[{slot:'早餐｜08:00',city:'佛罗伦萨',place:'Gilli 或 Rivoire',dish:'cappuccino + 可颂',note:'历史咖啡馆早餐，开启 V4 新增全天深度游。'},{slot:'午餐｜12:30',city:'佛罗伦萨',place:'All\'Antico Vinaio',dish:'schiacciata 三明治',note:'著名大三明治；排队过长时改附近店。'},{slot:'晚餐｜20:30',city:'佛罗伦萨',place:'Trattoria ZaZa 或 4 Leoni',dish:'托斯卡纳牛排/松露意面',note:'V4新增D5晚餐；建议预约。'}],
+ D6:[{slot:'早餐｜07:15',city:'佛罗伦萨',place:'酒店/SMN',dish:'咖啡 + cornetto',note:'只做快速补给，直接上去 Poggibonsi 的火车；避免额外绕行。'},{slot:'午餐｜12:00–12:40',city:'圣吉米尼亚诺',place:'Ristorante Perucà',dish:'pici/托斯卡纳前菜 + 当地酒',note:'主街附近、午餐时段适合一餐坐下；若火车或巴士延误，改 Dondoli gelato 加 panino 外带，准时去锡耶纳。'},{slot:'沿途小吃｜圣吉米尼亚诺',city:'Piazza della Cisterna',place:'Gelateria Dondoli',dish:'gelato + 番红花伴手礼',note:'只买一球后立刻赶巴士；不是坐下来吃第二顿。'},{slot:'晚餐｜20:30',city:'皮恩扎',place:'La Buca delle Fate',dish:'pici cacio e pepe + Pecorino',note:'小红书与公开攻略高频的托斯卡纳组合；订位失败改 La Taverna del Pecorino，羊奶酪照样要尝。'}],
+ D7:[{slot:'早餐｜08:00',city:'皮恩扎',place:'镇内奶酪店',dish:'Pecorino + panforte/ricciarelli',note:'把特色小吃带上巴士；不要因坐下早餐错过 Chiusi 衔接。'},{slot:'午餐｜12:30',city:'罗马 Termini',place:'Mercato Centrale Roma',dish:'快速午餐',note:'抵达后快速午餐，为下午罗马精华游留出完整时间。'},{slot:'晚餐｜20:30',city:'罗马',place:'纳沃纳广场周边',dish:'披萨或意面',note:'罗马精华一日游后，在纳沃纳广场周边快速晚餐。'}],
+ D8:[{slot:'早餐｜07:15',city:'Ottaviano',place:'Forno Feliziani',dish:'focaccia/披萨片 + 咖啡',note:'博物馆前快速外带；不在早餐店久坐。'},{slot:'午餐｜14:00',city:'梵蒂冈周边',place:'Forno 或 Bonci',dish:'披萨片',note:'快速简餐，不占用游览时间。'},{slot:'晚餐｜19:00',city:'罗马',place:'Li Rioni a Santiquattro',dish:'罗马薄脆披萨',note:'最后的罗马晚餐；Monti 街区夜游前的补给。'}],
+ D9:[{slot:'早餐｜08:00',city:'罗马',place:'酒店附近',dish:'简单早餐',note:'根据航班时间安排。'},{slot:'机场备选｜安检后',city:'FCO T3',place:'ADR 餐饮区',dish:'Eataly / Rossopomodoro / 快速外带',note:'只在通过安检且确认登机口后用餐；以机场当日门店、航站楼为准。'}]
+};
+// 美食榜
+const cityRanking=(city,sourceLabel,sourceUrl,items)=>({city,items:items.map(([name,dish,label,note,timing,lat,lng,itemSourceLabel=sourceLabel,itemSourceUrl=sourceUrl])=>({name,dish,label,note,timing,lat,lng,sourceLabel:itemSourceLabel,sourceUrl:itemSourceUrl}))});
+const foodRankings=[
+cityRanking('米兰','YesMilano｜米兰历史餐饮','https://www.yesmilano.it/en/see-and-do/itineraries/5-historical-places-eat-milano',[
+ ['Luini','panzerotto','当地经典','Duomo 后外带，酥炸半月包是米兰快食代表。','午间小吃',45.4663,9.1902],
+ ['Pasticceria Marchesi 1824','咖啡 + 奶油可颂','起源/老字号','1824 老牌糕点咖啡馆；适合站着喝一杯。','早餐',45.4655,9.1807],
+ ['Pasticceria Cova','咖啡 + 甜点','起源/老字号','1817 创立的老字号，适合蒙特拿破仑街购物间歇。','下午茶',45.468,9.1963],
+ ['Camparino in Galleria','Campari aperitivo','起源/老字号','拱廊内经典开胃酒吧；傍晚只喝一杯即可。','开胃酒',45.4653,9.1901],
+ ['Bar Basso','Negroni Sbagliato','起源/老字号','Negroni Sbagliato 的诞生地；需特地前往，不塞进D2。','夜饮',45.477,9.2175],
+ ['Pasticceria Cucchi','mignon 甜点 + espresso','本地高频','Porta Ticinese 一带传统糕点咖啡，作为 Navigli 备选。','下午茶',45.4513,9.1826],
+ ['Gattullo','咖啡 + brioche','本地高频','本地早餐吧风格，适合不赶行程的早晨。','早餐',45.4589,9.2078],
+ ['Pavé','天然酵母可颂','本地高频','Brera/中央站之间的精品烘焙选择。','早餐',45.477,9.2065],
+ ['Zàini Milano','巧克力','起源/老字号','1913 巧克力品牌；买小盒作火车零食。','伴手礼',45.4815,9.2135],
+ ['Pasticceria Martesana','意式甜点','本地高频','适合挑小份糕点，不额外安排正餐。','下午茶',45.496,9.2225]
+]),
+cityRanking('多洛米蒂 · Ortisei','Val Gardena Tourism｜山谷餐饮','https://www.valgardena.it/en/',[
+ ['Baita Sofie Hütte','knödel + 南提洛尔炖菜','行程顺路','Seceda 缆车上山后的山屋；以天气和缆车运行优先。','午间小吃',46.607,11.732],
+ ['Bäckerei Willi Costa','黑麦面包 + strudel','本地高频','出发前买 Speck 三明治和苹果卷，适合带上火车。','早餐',46.5763,11.6732],
+ ['Café Corso','cappuccino + 蛋糕','行程顺路','Ortisei 主街短歇，晚到后不强求。','早餐',46.5758,11.6724],
+ ['Café Karin','apple strudel','本地高频','苹果卷与热饮；山区下午降温时适合。','下午茶',46.5754,11.6717],
+ ['Mauriz Keller','canederli 小份','当地经典','南提洛尔团子/烟熏火腿风味；作为镇内备选。','下午茶',46.5757,11.6712],
+ ['Tubladel','Speck + 山地奶酪','本地高频','小红书高频晚餐；D2 深夜到达不安排。','晚间小食',46.5769,11.6734],
+ ['Pizzeria Cërcia','pizza al taglio','行程顺路','晚班车前的快餐备选。','晚间小食',46.5747,11.6721],
+ ['Mont Sëuc','山地咖啡 + 蛋糕','行程顺路','Alpe di Siusi 一带观景补给，非必去。','下午茶',46.5575,11.649],
+ ['Baita Daniel','自制蛋糕','当地经典','Ladin 山屋甜点；只在徒步动线顺路时停。','下午茶',46.6003,11.6904],
+ ['Caffè Adler','espresso + 小甜点','行程顺路','酒店区咖啡备选，适合等巴士。','早餐',46.5758,11.673]
+]),
+cityRanking('威尼斯','Visit Venezia｜威尼斯咖啡文化','https://www.visitvenezia.eu/en/venetianity/tales-of-venice/coffee-and-venice-a-400-year-long-story',[
+ ['Caffè Florian','咖啡 + 传统甜点','起源/老字号','1720 开业的历史咖啡馆；为氛围付费，点一杯即可。','上午咖啡',45.434,12.338],
+ ['Gran Caffè Quadri','espresso','起源/老字号','圣马可广场另一家历史咖啡馆，选 Florian 或 Quadri 其一。','上午咖啡',45.4343,12.3388],
+ ['Rosa Salva','frittella / cornetto','起源/老字号','1879 起传承的威尼斯糕点店；早餐和外带都合适。','早餐',45.4355,12.3394,'Rosa Salva｜品牌历史','https://pasticceria.rosasalva.it/en/history'],
+ ['Pasticceria Tonolo','frittella','本地高频','Dorsoduro 传统炸甜点，上午更稳。','上午小吃',45.437,12.3218],
+ ['Pasticceria Rizzardini','威尼斯饼干','起源/老字号','老城传统糕点，适合买小份饼干。','下午茶',45.4396,12.3267],
+ ['Dal Nono Colussi','baicoli 饼干','本地高频','威尼斯干饼/旅行零食，适合火车上吃。','伴手礼',45.4412,12.3291],
+ ['VizioVirtù','手工巧克力','本地高频','靠近 Rialto 的巧克力店，顺路只买一颗。','下午茶',45.4389,12.3359],
+ ['Suso Gelatoteca','gelato','本地高频','桥梁 Citywalk 中间的冰淇淋短歇。','下午茶',45.4383,12.3368],
+ ['Bacareto da Lele','panino + ombra','当地经典','Santa Lucia 附近立食小点，赶火车优先。','午间小吃',45.4398,12.3215],
+ ['All\'Arco','cicchetti','当地经典','Rialto 附近站着吃的下酒小点。','午间小吃',45.4386,12.3359],
+ ['Cantinone Già Schiavi','cicchetti + ombra','本地高频','Dorsoduro 备选，别为它折返。','开胃酒',45.4332,12.3284]
+]),
+cityRanking('佛罗伦萨','Visit Tuscany｜佛罗伦萨历史咖啡','https://www.visittuscany.com/en/ideas/florences-historic-cafes/',[
+ ['Gilli','咖啡 + 可颂','起源/老字号','1733 创立；V4 D5 学院美术馆前早餐。','早餐',43.7702,11.2559],
+ ['Rivoire','热巧克力','起源/老字号','1872 创立的巧克力老店；V4 D5 早餐备选。','早餐',43.7695,11.2556],
+ ['All\'Antico Vinaio','schiacciata','本地高频','V4 D5 午餐：著名大三明治。','午间小吃',43.7677,11.2583],
+ ['Gelateria dei Neri','gelato','行程顺路','Uffizi 出来外带，10分钟完成。','下午茶',43.7674,11.2591],
+ ['Vini e Vecchi Sapori','托斯卡纳晚餐','行程顺路','D4 晚餐首选；需要预约。','晚餐',43.77,11.256],
+ ['Trattoria ZaZa','托斯卡纳牛排','本地高频','V4 D5 晚餐；建议预约。','晚餐',43.771,11.255],
+ ['Trattoria 4 Leoni','松露意面','本地高频','V4 D5 晚餐备选。','晚餐',43.765,11.25],
+ ['Perché no!','gelato','本地高频','大教堂/共和广场之间的经典冰淇淋。','下午茶',43.7709,11.2538],
+ ['I Fratellini','小杯 Chianti + panino','当地经典','站着吃的迷你三明治，适合老桥前补给。','午间小吃',43.7693,11.2564],
+ ['Procacci','松露小三明治','起源/老字号','1885 老店；一枚小三明治即可体验。','开胃酒',43.7703,11.2542]
+]),
+cityRanking('圣吉米尼亚诺','San Gimignano Tourism｜本地商店','https://www.sangimignano.com/en/',[
+ ['Gelateria Dondoli','番红花/圣酒 gelato','本地高频','水井广场核心，买一球立即继续换乘。','下午茶',43.4678,11.043],
+ ['Bar Gelateria dei Combattenti','番红花/ Vernaccia gelato','起源/老字号','1924 创立的本地老冰淇淋店；可试番红花口味。','下午茶',43.4666,11.0408,'Bar dei Combattenti｜品牌历史','https://www.barcombattenti.it/'],
+ ['Enoteca Corsi','Vernaccia + crostini','当地经典','城门旁小杯 Vernaccia 与小食组合。','开胃酒',43.4666,11.0409],
+ ['Gelateria dell\'Olmo','手工 gelato','本地高频','主街冰淇淋备选，Dondoli 排队长时用。','下午茶',43.4672,11.0432],
+ ['Pasticceria Il Criollo','托斯卡纳饼干','本地高频','买 cantucci 作巴士零食。','伴手礼',43.4671,11.0428],
+ ['Forno di Calcedonio','focaccia','行程顺路','主街热面包与佛卡夏，适合外带。','午间小吃',43.467,11.042],
+ ['La Biscondola','panini','行程顺路','小份三明治优先，不坐下来拖时间。','午间小吃',43.4673,11.0416],
+ ['Riccapizza','pizza al taglio','行程顺路','公共交通日的快速补能量。','午间小吃',43.4668,11.0413],
+ ['Vinaio di San Gimignano','Vernaccia + 肉酱面包','当地经典','主街开胃酒小点，适合小份分享。','开胃酒',43.467,11.0436],
+ ['La Martina','panforte 切片','当地经典','托斯卡纳香料果干甜点，买一片即可。','伴手礼',43.4674,11.0421]
+]),
+cityRanking('锡耶纳','Visit Siena｜传统甜点','https://www.visitsiena.it/en/typical-sienese-sweets/',[
+ ['Pasticceria Nannini','ricciarelli + 咖啡','本地高频','贝壳广场周边适合快速站饮。','早餐',43.3186,11.3305],
+ ['Antica Drogheria Manganelli','panforte','起源/老字号','老城香料与传统甜点店；买一小块即可。','伴手礼',43.3188,11.3311],
+ ['Pizzicheria de Miccoli','Cinta Senese 小三明治','当地经典','传统熟食店，适合赶巴士时外带。','午间小吃',43.3186,11.331],
+ ['Pasticceria Bini','ricciarelli','本地高频','杏仁软饼备选，带走最省时间。','下午茶',43.318,11.331],
+ ['Pasticceria Buti','cavallucci','当地经典','蜂蜜茴香饼干，适合车上吃。','伴手礼',43.3205,11.3285],
+ ['Gelateria Kopa Kabana','gelato','行程顺路','主教堂至贝壳广场中间的短歇。','下午茶',43.3186,11.3301],
+ ['Caffè La Favorita','espresso + cornetto','本地高频','老城站饮早餐/咖啡点。','早餐',43.3187,11.3307],
+ ['Panificio Il Magnifico','focaccia','行程顺路','热面包外带，不影响下一段巴士。','午间小吃',43.3183,11.3293],
+ ['Pasticceria Peccati di Gola','pan co\' Santi','当地经典','葡萄干核桃甜面包，秋季更常见。','下午茶',43.3201,11.3302],
+ ['Bar Il Palio','spritz + 小食','本地高频','广场附近小杯开胃酒，若赶路则跳过。','开胃酒',43.319,11.3303]
+]),
+cityRanking('皮恩扎','Pienza Tourism｜味觉与本地特产','https://www.pienzawelcome.it/en/c/local-excellence/taste-flavours/',[
+ ['La Taverna del Pecorino','Pecorino 试吃','当地经典','当地羊奶酪、橄榄油和酒的快速品尝。','午间小吃',43.0775,11.6782],
+ ['La Tana del Goloso','Pecorino 拼盘 + panino','当地经典','Corso Rossellino 上的外带三明治。','午间小吃',43.0776,11.6792],
+ ['Salumeria Gastronomia del Corso','finocchiona + Pecorino','当地经典','熟食拼盘和佛卡夏，适合次日带去 Chiusi。','伴手礼',43.0777,11.6788],
+ ['La Fiel','focaccia / panino','行程顺路','鲜面包、夹馅佛卡夏，快速补给。','午间小吃',43.0774,11.6784],
+ ['Pasticceria Gelateria Dolce Sosta','gelato + 甜点','本地高频','镇内冰淇淋和甜点，晚饭前短歇。','下午茶',43.0779,11.6794],
+ ['Bottega di Cacio','多熟成 Pecorino','当地经典','比较 fresh、mature、wine-aged 羊奶酪。','伴手礼',43.0773,11.678],
+ ['Cugusi','Pecorino + 蜂蜜','当地经典','知名奶酪作坊方向；可试蜂蜜搭配。','伴手礼',43.068,11.689],
+ ['La Vecchia Bottega','pici 小份 + 小食','本地高频','非正餐时选小份熟食或露台饮品。','开胃酒',43.0775,11.6786],
+ ['La Buca delle Fate','Pecorino + pici','行程顺路','晚餐前确认预订；奶酪小食也可单点。','晚间小食',43.0773,11.6781],
+ ['La Guardiola Wine & Food','日落 aperitivo','本地高频','Monticchiello 方向日落开胃酒；只在有车时考虑。','开胃酒',43.0545,11.678]
+]),
+cityRanking('罗马','Turismo Roma｜Maritozzo 与历史咖啡','https://www.turismoroma.it/en/page/il-maritozzo',[
+ ['Sant\'Eustachio Il Caffè','Gran Caffè','起源/老字号','万神殿附近经典咖啡，排队通常快。','上午咖啡',41.8994,12.473],
+ ['Tazza d\'Oro','espresso / granita di caffè','起源/老字号','万神殿旁咖啡老店；可外带冰咖啡。','上午咖啡',41.8989,12.4762],
+ ['Pasticceria Regoli','maritozzo','起源/老字号','传统奶油面包；D8 出发前顺路。','早餐',41.8973,12.5017],
+ ['Antico Caffè Greco','espresso','起源/老字号','1760 历史咖啡馆；西班牙阶梯夜景前可体验。','下午茶',41.9059,12.4823,'Italia.it｜罗马历史咖啡','https://www.italia.it/en/lazio/rome/things-to-do/rome-historic-cafes'],
+ ['Giolitti','gelato','起源/老字号','百年冰淇淋店，老城步行顺路。','下午茶',41.8993,12.4812],
+ ['Forno Campo de\' Fiori','pizza bianca','当地经典','烤面包/白披萨，适合外带。','午间小吃',41.8954,12.4722],
+ ['Antico Forno Roscioli','pizza rossa','本地高频','Campo de\' Fiori 附近的切片披萨。','午间小吃',41.8949,12.4721],
+ ['Supplizio','supplì','当地经典','罗马炸饭团，小份快吃。','午间小吃',41.894,12.4724],
+ ['Trapizzino','trapizzino','本地高频','三角披萨口袋，适合不吃正餐时。','午间小吃',41.8858,12.4691],
+ ['Pasticceria Boccione','ricotta e visciole','起源/老字号','犹太区传统派；买一块带走。','下午茶',41.8934,12.4752]
+]),
+cityRanking('梵蒂冈','梵蒂冈博物馆｜访客餐饮','https://www.museivaticani.va/content/museivaticani/en/organizza-visita/servizi-per-i-visitatori/ristorazione/la-pizzeria.html',[
+ ['Forno Feliziani','focaccia / pizza al taglio','行程顺路','Ottaviano 附近，博物馆前外带最快。','早餐',41.9069,12.4574],
+ ['Pizzarium Bonci','pizza al taglio','本地高频','高频披萨片；时间紧直接跳过。','午间小吃',41.9075,12.447],
+ ['Old Bridge Gelateria','gelato','本地高频','博物馆出口/地铁间的快速甜点。','下午茶',41.9063,12.457],
+ ['Lemongrass Gelato','gelato','本地高频','Prati 的另一家冰淇淋备选。','下午茶',41.9073,12.4555],
+ ['200 Gradi','panino','本地高频','Ottaviano 站旁大三明治，排队时改 Forno。','午间小吃',41.9064,12.4587],
+ ['Panino Divino','panino','行程顺路','梵蒂冈旁便携三明治，适合航班倒推日。','午间小吃',41.907,12.4574],
+ ['Dolce Maniera','意式甜点','本地高频','Prati 小甜点和咖啡，适合早到等预约。','早餐',41.9051,12.4577],
+ ['Bacio di Puglia','taralli + focaccia','当地经典','普利亚式咸点，外带友好。','午间小吃',41.9073,12.4568],
+ ['La Zanzara','aperitivo 小食','本地高频','仅时间富裕才坐；不抢机场缓冲。','开胃酒',41.9075,12.458],
+ ['Vatican Museums Pizzeria','pizza / sandwich','行程顺路','博物馆内官方餐饮，走不动时再用。','午间小吃',41.9065,12.4547]
+]),
+cityRanking('FCO 机场','ADR｜Fiumicino 官方餐饮','https://m.adr.it/en/web/aeroporti-di-roma-en/food',[
+ ['Eataly Fiumicino','咖啡/甜点/外带','行程顺路','T3 安检后再用，确认登机口后点单。','候机小食',41.8003,12.2389,'Eataly｜FCO T3','https://www.eataly.net/it_it/negozi/roma/fiumicino'],
+ ['Rossopomodoro','pizza / sfogliatella','行程顺路','机场内坎帕尼亚风味备选。','候机小食',41.8005,12.2391],
+ ['Caffè Napoli','espresso + cornetto','行程顺路','T3 咖啡备选，安检后再确认位置。','候机小食',41.8004,12.2393,'ADR｜FCO 店铺目录','https://www.adr.it/en/web/aeroporti-di-roma-en/fiumicino-shop-eat-shops'],
+ ['Caffè Vergnano','espresso','行程顺路','T1 咖啡备选，勿跨航站楼专程去。','候机小食',41.8006,12.2394,'ADR｜FCO 店铺目录','https://www.adr.it/en/web/aeroporti-di-roma-en/fiumicino-shop-eat-shops'],
+ ['Cioccolati Italiani','gelato / 巧克力','行程顺路','候机甜点，适合有充足登机缓冲时。','候机小食',41.8002,12.2395,'ADR｜FCO 店铺目录','https://www.adr.it/en/web/aeroporti-di-roma-en/fiumicino-shop-eat-shops'],
+ ['Bottega Prosecco','prosecco + 小食','行程顺路','只在不赶登机时作为候机开胃酒。','候机小食',41.8001,12.2392],
+ ['Beercode','精酿啤酒 + 小吃','行程顺路','候机区酒吧备选，过安检后再决定。','候机小食',41.8001,12.2391],
+ ['Doppio Malto','啤酒 + 小食','行程顺路','机场内轻食/啤酒备选。','候机小食',41.8002,12.239],
+ ['Farinella','pizza al taglio','行程顺路','适合登机前快速吃一片。','候机小食',41.8004,12.239],
+ ['Panino Giusto','panino','行程顺路','外带三明治，最适合赶登机日。','候机小食',41.8005,12.2388]
+])
+];
+// 景点榜
+const attractionCity=(city,sourceLabel,sourceUrl,items)=>({city,items:items.map(([name,note,status,lat,lng,itemSourceLabel=sourceLabel,itemSourceUrl=sourceUrl])=>({name,note,status,lat,lng,sourceLabel:itemSourceLabel,sourceUrl:itemSourceUrl}))});
+const attractionRankings=[
+attractionCity('米兰','YesMilano｜Top 10 attractions','https://www.yesmilano.it/en/articles/not-be-missed-top-tourist-attractions-milano',[
+ ['米兰大教堂','已排入 D2；外观与屋顶按预约决定，不另占整段。','included',45.4642,9.1900],
+ ['埃马努埃莱二世拱廊','已与大教堂合并打卡，是同一段步行动线。','included',45.4657,9.1900],
+ ['《最后的晚餐》','D2 预约锚点；必须按预订时段并提前安检。','included',45.4658,9.1710],
+ ['斯福尔扎城堡','D2 已排入；默认外观与公园，时间足再进馆。','included',45.4705,9.1793],
+ ['布雷拉艺术区','D2 已排入；街区与咖啡停留，不强塞美术馆。','included',45.4720,9.1880],
+ ['Porta Nuova / 垂直森林','D2 傍晚已排入，接火车前晚餐最顺路。','included',45.4838,9.1897],
+ ['斯卡拉歌剧院','本次未排入；与大教堂相近，但不以剧院内参观挤压预约景点。','skipped',45.4668,9.1897],
+ ['布雷拉美术馆','本次未排入；艺术馆深度参观会让 D2 过满。','skipped',45.4720,9.1880],
+ ['Navigli 运河区','本次未排入；放入会从北部火车线折返。','skipped',45.4520,9.1750],
+ ['纪念墓园','本次未排入；不破坏单向 Citywalk 与夜间进山。','skipped',45.4870,9.1760]
+]),
+attractionCity('多洛米蒂','Val Gardena 官方｜Seceda activities','https://www.valgardena.it/en/summer-holidays-dolomites/trekking/seceda/activities/',[
+ ['Seceda 刀锋山','D3 核心已排入；从 Ortisei 缆车上山，天气优先。','included',46.6050,11.7260],
+ ['Ortisei 小镇','夜间入住与 D3 出发均在此，已作为交通基地排入。','included',46.5767,11.6728],
+ ['Santa Maddalena','D3 已排入；只拍教堂与山体机位，倒推末班离开。','included',46.6430,11.7350],
+ ['Alpe di Siusi','本次未排入；无车多山谷串联会明显增加折返。','skipped',46.5400,11.6600],
+ ['Sassolungo','本次未排入；适合独立徒步日，不与 Seceda 同日叠加。','skipped',46.5200,11.7300],
+ ['Gardena Pass','本次未排入；公路观景点对无自驾行程性价比低。','skipped',46.5490,11.8080],
+ ['Lago di Carezza','本次未排入；距 Val Gardena 动线偏西，公共交通时间成本高。','skipped',46.4100,11.5740],
+ ['Val Gardena 山谷','已通过 Ortisei—Seceda 路段体验核心山谷景观。','included',46.5600,11.7400],
+ ['Tre Cime','本次未排入；与本程东南出山方向和夜班火车不兼容。','skipped',46.6180,12.3030],
+ ['Lago di Braies','本次未排入；热门湖泊绕行很大，不牺牲 Seceda。','skipped',46.6940,12.0850]
+]),
+attractionCity('威尼斯','Visit Venezia｜Places of Venice','https://www.visitvenezia.eu/en/attractions-and-places-in-venice/places-of-venice',[
+ ['圣马可广场','D4 已排入，清晨外观先看人流最少的核心。','included',45.4345,12.3396],
+ ['总督宫','D4 已作外观；内部参观本次不单独加时。','included',45.4338,12.3404],
+ ['圣马可教堂','本次未安排入内；广场外观已覆盖地标。','skipped',45.4340,12.3398],
+ ['叹息桥','D4 已排入，与圣马可线连续步行。','included',45.4339,12.3408],
+ ['里亚托桥','D4 已排入，沿主岛西北向推进。','included',45.4380,12.3359],
+ ['大运河','D3 夜到已看夜景，D4 沿线继续体验。','included',45.4408,12.3250],
+ ['Libreria Acqua Alta','D4 已排入；设为短停而非长时间逛店。','included',45.4389,12.3432],
+ ['学院美术馆','本次未排入；不反向跨运河增加走路。','skipped',45.4319,12.3285],
+ ['Murano','本次未排入；岛屿往返会挤压高铁离城缓冲。','skipped',45.4587,12.3510],
+ ['Burano','本次未排入；彩岛适合额外半天，不塞进单日。','skipped',45.4859,12.4160]
+]),
+attractionCity('佛罗伦萨','Feel Florence｜Points of interest','https://www.feelflorence.it/en/points-interest',[
+ ['乌菲兹美术馆','V4 D5 深度游；约2-2.5小时美第奇收藏精选。','included',43.7678,11.2553],
+ ['圣母百花大教堂','V4 D5 已排入；外观+可选登顶。','included',43.7731,11.2560],
+ ['领主广场','V4 D4/D5 均已排入，和乌菲兹、老桥同一条线。','included',43.7696,11.2558],
+ ['老桥','V4 D5 已排入，日落前最佳。','included',43.7680,11.2530],
+ ['皮蒂宫','D4 已排入；科西莫一世的大公宫邸。','included',43.7650,11.2500],
+ ['波波里花园','D4 已排入；美第奇奠定的宫廷花园。','included',43.7640,11.2485],
+ ['学院美术馆 / 大卫像','🌟 V4 D5 新增：米开朗基罗《大卫》真迹。','included',43.7768,11.2585],
+ ['米开朗基罗广场','🌟 V4 D5 新增：佛罗伦萨全景日落。','included',43.7629,11.2655],
+ ['圣十字教堂','本次未排入；东侧延伸会拉长当日步行。','skipped',43.7687,11.2625],
+ ['旧宫','领主广场外观已顺路覆盖；内部本次不加时。','optional',43.7696,11.2560]
+]),
+attractionCity('圣吉米尼亚诺','San Gimignano 官方旅游站','https://www.sangimignano.com/en/',[
+ ['水井广场','D6 已排入，是短停打卡的核心。','included',43.4676,11.0435],
+ ['Duomo 广场','与水井广场相邻，已顺路经过。','included',43.4675,11.0430],
+ ['Torre Grossa','本次只看塔楼外观；登塔设为时间足够才加。','optional',43.4670,11.0430],
+ ['圣母升天主教堂','本次未安排入内；公共交通日避免增加门票与排队。','skipped',43.4674,11.0431],
+ ['Rocca di Montestaffoli','本次未排入；上坡观景与等车缓冲冲突。','skipped',43.4688,11.0450],
+ ['圣若望小堂','本次未排入；优先留给塔楼街景与换乘。','skipped',43.4680,11.0440],
+ ['城墙步道','本次未排入；不延长 D6 的步行与巴士风险。','skipped',43.4660,11.0400],
+ ['市民博物馆','本次未排入；博物馆深度游放弃以保障南下。','skipped',43.4680,11.0440],
+ ['Sant\'Agostino 教堂','本次未排入；偏离短停主线。','skipped',43.4687,11.0438],
+ ['Vernaccia 观景点','本次未排入；酒乡视野留给下次自驾/慢游。','skipped',43.4690,11.0460]
+]),
+attractionCity('锡耶纳','Visit Siena｜Unmissable attractions','https://www.visitsiena.it/en/places-to-see/',[
+ ['贝壳广场','D6 已排入；20–30 分钟看广场外观与歇脚。','included',43.3188,11.3308],
+ ['锡耶纳主教堂','D6 已看外观；内部购票作为下次深游。','included',43.3177,11.3288],
+ ['Facciatone','D6 已排入外观；登顶只在班次充裕时考虑。','included',43.3177,11.3288],
+ ['曼吉亚塔','已随贝壳广场/市政宫外观覆盖，未安排登塔。','included',43.3186,11.3300],
+ ['市政宫','D6 已看外观；不进市民博物馆避免错过巴士。','included',43.3184,11.3303],
+ ['Santa Maria della Scala','本次未排入；大型博物馆适合单独半天。','skipped',43.3195,11.3290],
+ ['圣多明我教堂','本次未排入；向西北延伸会拉长 D6。','skipped',43.3206,11.3280],
+ ['Medici 堡垒','本次未排入；观景适合在锡耶纳过夜时加入。','skipped',43.3260,11.3280],
+ ['Salimbeni 宫','本次未排入；不为建筑外观离开主广场线。','skipped',43.3215,11.3300],
+ ['Fontebranda','本次未排入；保留给慢游锡耶纳的步行环线。','skipped',43.3191,11.3276]
+]),
+attractionCity('皮恩扎','Pienza Welcome｜Ideal Renaissance town','https://www.pienzawelcome.it/en/',[
+ ['Pio II 广场','D6 已排入，是皮恩扎理想城市核心。','included',43.0776,11.6791],
+ ['皮恩扎主教堂','D6 已看外观，和广场连在同一短停。','included',43.0775,11.6792],
+ ['Palazzo Piccolomini','D6 已看外观；内部花园不另加票务时间。','included',43.0776,11.6790],
+ ['Corso Rossellino','D6 已排入，晚餐与夜间 Citywalk 主轴。','included',43.0770,11.6780],
+ ['城墙观景','D6 已排入，黄昏看奥尔恰谷的最短路线。','included',43.0767,11.6800],
+ ['Via dell\'Amore','本次未单列；路过可看，不为路牌绕行。','skipped',43.0764,11.6800],
+ ['Pieve di Corsignano','本次未排入；镇外下坡往返与末班风险冲突。','skipped',43.0739,11.6800],
+ ['Monticchiello','本次未排入；适合有车或额外住宿日。','skipped',43.0525,11.7230],
+ ['Vitaleta 小教堂','本次未排入；与城内行程不顺路。','skipped',43.0385,11.6860],
+ ['奥尔恰谷丝柏路','D6 仅在抵达早、司机已确认时作为可选短途 taxi。','optional',43.0595,11.6440]
+]),
+attractionCity('罗马','Turismo Roma｜Official tourism','https://www.turismoroma.it/en',[
+ ['斗兽场','V4 D7 罗马精华一日游核心；入内参观。','included',41.8902,12.4922],
+ ['古罗马广场','V4 D7 已排入，和斗兽场连续游览。','included',41.8925,12.4853],
+ ['帕拉蒂尼山','V4 D7 已排入，与广场共用同一段票务动线。','included',41.8898,12.4880],
+ ['万神殿','V4 D7 已排入；外观/入内约20-30分钟。','included',41.8986,12.4769],
+ ['纳沃纳广场','V4 D7 已排入，免费外观短停即可。','included',41.8992,12.4731],
+ ['许愿池','V4 D7 已排入，18:15打卡。','included',41.9009,12.4833],
+ ['西班牙阶梯','V4 D7 已排入，与许愿池连续安排。','included',41.9060,12.4828],
+ ['威尼斯广场','V4 D7 新增；外观打卡。','included',41.8946,12.4832],
+ ['圣天使堡','V4 D8 可选；从梵蒂冈步行5分钟。','optional',41.9031,12.4663],
+ ['鲜花广场','本次未排入；不再增加一个与夜生活线重叠的广场。','skipped',41.8956,12.4722]
+]),
+attractionCity('梵蒂冈','Vatican Museums｜Official visitor information','https://www.museivaticani.va/content/museivaticani/en.html',[
+ ['梵蒂冈博物馆','V4 D8 已排入，必须按官方预约进场。','included',41.9065,12.4536],
+ ['西斯廷礼拜堂','V4 D8 已排入，包含在博物馆动线内。','included',41.9060,12.4543],
+ ['圣彼得大教堂','V4 D8 已排入；教堂开放与安检为实际约束。','included',41.9022,12.4539],
+ ['圣彼得广场','V4 D8 已排入，和教堂外观同段完成。','included',41.9022,12.4570],
+ ['圣彼得大教堂穹顶','只在航班缓冲、体力和排队都充足时可选。','optional',41.9024,12.4535],
+ ['梵蒂冈花园','本次未排入；需专门预约，和机场日不兼容。','skipped',41.9040,12.4470],
+ ['梵蒂冈墓穴','本次未排入；不压缩机场缓冲。','skipped',41.9020,12.4537],
+ ['Pio Clementino 博物馆','本次未单列；随博物馆当日动线择重点，不额外承诺。','optional',41.9065,12.4537],
+ ['拉斐尔房间','本次未单列；随博物馆流线视人流决定。','optional',41.9069,12.4542],
+ ['梵蒂冈美术馆','本次未单列；博物馆内择重点，不追加独立时段。','optional',41.9067,12.4527]
+])
+];
+// UNESCO 遗产
+const heritageKindMeta={cultural:{label:'世界文化遗产',symbol:'⌂'},natural:{label:'世界自然遗产',symbol:'⛰'},landscape:{label:'世界文化遗产·文化景观',symbol:'◒'},intangible:{label:'UNESCO 非物质文化遗产',symbol:'∞'}};
+const heritageItem=(day,city,kind,status,name,lat,lng,note,sourceUrl)=>({day,city,kind,status,name,lat,lng,note,sourceLabel:kind==='intangible'?'UNESCO｜Intangible Cultural Heritage':'UNESCO｜World Heritage Centre',sourceUrl});
+const heritageSites=[
+ heritageItem('D2','米兰','cultural','included','圣玛丽亚感恩教堂及《最后的晚餐》',45.4658,9.1710,'行程已安排《最后的晚餐》。遗产本体是教堂、多明我会修院与原址餐厅的整体，不只是单幅画。','https://whc.unesco.org/en/list/93/'),
+ heritageItem('D3','多洛米蒂','natural','included','多洛米蒂',46.6050,11.7260,'本程 Seceda 是进入多洛米蒂山景语境的观景点。UNESCO 自然遗产由九个组成部分构成。','https://whc.unesco.org/en/list/1237/'),
+ heritageItem('D3–D4','威尼斯','cultural','included','威尼斯及其潟湖',45.4380,12.3359,'D3 夜到与 D4 清晨 Citywalk 均在遗产城市肌理中；以主岛步行为主。','https://whc.unesco.org/en/list/394/'),
+ heritageItem('D4–D5','佛罗伦萨','cultural','included','佛罗伦萨历史中心',43.7696,11.2558,'V4新增D5深度游：学院美术馆、乌菲兹、领主广场、老桥、米开朗基罗广场均在老城遗产核心。','https://whc.unesco.org/en/list/174/'),
+ heritageItem('D4','佛罗伦萨','cultural','included','美第奇别墅与花园',43.828,11.2425,'D4下午参观 Careggi 与 Castello 两处美第奇别墅，2013年列入世界遗产。','https://whc.unesco.org/en/list/175/'),
+ heritageItem('D6','圣吉米尼亚诺','cultural','included','圣吉米尼亚诺历史中心',43.4676,11.0435,'水井广场与塔楼街景正是遗产核心：中世纪城镇格局和幸存塔楼群。','https://whc.unesco.org/en/list/550/'),
+ heritageItem('D6','锡耶纳','cultural','included','锡耶纳历史中心',43.3188,11.3308,'贝壳广场、市政宫与主教堂外观均在遗产核心；D6 用短停感受城市空间。','https://whc.unesco.org/en/list/717/'),
+ heritageItem('D6–D7','皮恩扎','cultural','included','皮恩扎历史中心',43.0776,11.6791,'Pio II 广场、主教堂和 Corso Rossellino 是"理想城市"规划的核心。','https://whc.unesco.org/en/list/789/'),
+ heritageItem('D6','奥尔恰谷','landscape','included','瓦尔多尔恰（Val d\'Orcia）文化景观',43.0595,11.6440,'皮恩扎丝柏路的景观背景。仅在交通缓冲充分时短途 taxi 前往。','https://whc.unesco.org/en/list/1026/'),
+ heritageItem('D7–D8','罗马','cultural','included','罗马历史中心',41.8925,12.4853,'V4 D7 精华一日游：斗兽场—广场—许愿池—万神殿—纳沃纳均在遗产城市历史层累中。','https://whc.unesco.org/en/list/91/'),
+ heritageItem('D8','梵蒂冈','cultural','included','梵蒂冈城',41.9022,12.4539,'梵蒂冈博物馆、西斯廷礼拜堂、圣彼得大教堂与广场均在世界遗产城内。','https://whc.unesco.org/en/list/286/'),
+ heritageItem('D8','罗马','cultural','included','圣母大殿',41.8983,12.4987,'罗马四大圣殿之一；V4 D8 可选补充。','https://whc.unesco.org/en/list/91/')
+];
+
+// 城市攻略
+const cityDossiers={
+ '米兰':{route:'中央站 → 大教堂/拱廊 → 城堡 → 最后的晚餐 → Brera → Porta Nuova → Centrale：完整保留白天，18:30 后才离城。',items:['小红书高频主题是「屋顶 + 拱廊 + 城堡公园 + Brera」的 Citywalk；真正的时间锚点是《最后的晚餐》预约。','大教堂屋顶、最后的晚餐均可能有安检/预约门槛；两者都想进时，先根据晚餐馆预约倒排。','把 Porta Nuova/垂直森林和 17:45 左右的晚餐加进 D2，晚间再上火车。']},
+ '多洛米蒂 · Ortisei':{route:'夜间巴士下车点 → 镇中心住宿：深夜直接入住；D3 约 10:00 再出发上山。',items:['公开攻略的共识是住 Ortisei 镇中心或缆车站步行圈，比偏远山景房更适合无车行。','深夜抵达只做入住、补水与确认次日班次；不找餐厅、不跨山谷打卡。','餐厅晚开正常，但不等于深夜仍营业；晚间火车方案应自备零食。']},
+ '多洛米蒂':{route:'Ortisei → Seceda → 回镇换乘 → Santa Maddalena → Bressanone：10:00 晚起开始，全程朝东南出山。',items:['Seceda 需把上、下山和排队一并计入；小红书常见的「最早上山/日落回程」适合观景，但本行程在深夜抵达后选择 10:00 出发。','Santa Maddalena 的核心是教堂与山体机位；机位有步行段，拍摄时间必须倒推最后一班下山巴士。','这一天不租车也能做，但属于班次敏感日：前一晚确认 südtirolmobil 实时班次。']},
+ '威尼斯':{route:'Santa Lucia → 圣马可 → 叹息桥 → 里亚托 → Acqua Alta；整体由东南向西北，最后回车站上火车。',items:['小红书高频的「一日不走回头路」重点是先清晨圣马可，随后沿桥与巷道向里亚托推进。','抵达夜只看大运河蓝调，主景点留在 D4 清晨；人少的体验来自早到。','主岛步行最可控；带行李或跨岛才坐 vaporetto。']},
+ '佛罗伦萨':{route:'V4 D4：SMN → 酒店 → Careggi → Castello → 领主广场夜景；V4 D5：学院美术馆 → 大教堂 → 乌菲兹 → 领主广场 → 老桥 → 米开朗基罗广场。',items:['🌟 V4版本亮点：D5新增全天深度游，新增学院美术馆/大卫像、米开朗基罗广场日落，乌菲兹时间更充裕。','D5是佛罗伦萨深度游的黄金日，建议提前预约学院美术馆和乌菲兹。','米开朗基罗广场日落是佛罗伦萨全景的最佳机位，建议日落前1小时到达。']},
+ '托斯卡纳':{route:'佛罗伦萨 → Poggibonsi（只换乘）→ 圣吉米尼亚诺 → 锡耶纳 → 皮恩扎：直向南/东南推进。',items:['Poggibonsi 的著名堡垒值得专程者停留，但对本行程它只是交通枢纽。','这段的真实性比「全打卡」更重要：圣吉米尼亚诺、锡耶纳、皮恩扎当天串联仍是公共交通高风险组合。','奥尔恰谷丝柏路只在皮恩扎当地使用短途 taxi，不可步行。']},
+ '罗马':{route:'V4 D7：斗兽场 → 古罗马广场 → 威尼斯广场 → 许愿池 → 西班牙阶梯 → 万神殿 → 纳沃纳广场。',items:['🌟 V4版本：罗马压缩为高效精华一日游，参考经典Citywalk路线串联所有核心地标。','斗兽场建议提前预约，是D7的时间锚点；与古罗马广场、帕拉蒂尼山联票连续游览。','各景点之间步行约5-15分钟，是罗马最经典的步行路线；日落后许愿池和纳沃纳广场更美。']},
+ '梵蒂冈':{route:'V4 D8：Termini → Ottaviano → 梵蒂冈博物馆/西斯廷 → 圣彼得大教堂 → 可选圣天使堡 → 圣母大殿。',items:['小红书高频避坑是「博物馆入口不在圣彼得广场」：先按预约进博物馆，西斯廷礼拜堂在其动线内。','首批预约能缓解人流，但仍需安检；着装、教堂开放状态和登顶排队均可能改变时长。','圣天使堡可灵活安排，从梵蒂冈步行5分钟可达；如时间紧张可舍弃。']},
+ 'FCO 机场':{route:'梵蒂冈 → Termini → Leonardo Express → FCO：回到 Termini 后不再插入市区景点。',items:['Leonardo Express 是 Termini 到机场的直达选项；购买后核对当日站台和班次。','机场周边不再安排打卡，市区最后一餐放在 Ottaviano 或 Termini 更稳。']}
+};
+
+const guideBook={
+ '米兰利纳特机场':['米兰利纳特机场 到中央站','晚到优先直达酒店','30–45分钟','深夜不排景点；先确认打车/机场巴士末班'],
+ 'Pizzeria Spontini':['Spontini 米兰 营业时间','抵达日晚餐看实际营业','20–40分钟','晚到常售罄或关门，准备酒店附近备选'],
+ '米兰大教堂与拱廊':['米兰大教堂 登顶 机位 攻略','09:15后','外观20–30分钟；登顶另计','小红书高频建议是登顶；若不登顶只看广场与拱廊'],
+ '斯福尔扎城堡':['斯福尔扎城堡 米兰 攻略','上午外墙逆光较弱','约20分钟（外观）','时间紧只看外观与城堡公园'],
+ '《最后的晚餐》':['最后的晚餐 米兰 预约 攻略','以已订时段为唯一锚点','45分钟含提前到场','必须预约且提前30分钟；15分钟参观不要迟到'],
+ '布雷拉艺术区':['Brera 米兰 艺术区 攻略','中午至午后','约30分钟（街区）','只做街区快走、咖啡或橱窗'],
+ 'Ortisei 小镇':['Ortisei 小镇 攻略 美食','深夜入住后不排景点','—','只确认次日缆车与巴士'],
+ 'Seceda 刀锋山':['Seceda 缆车 攻略 机位','10:00 左右上山','2.5–4小时','先看天气与缆车运行；山顶温差大'],
+ 'Santa Maddalena':['Santa Maddalena 富内斯 攻略','下午侧光、日落前','约20–30分钟拍摄','机位需步行；别因拍照错过下山巴士'],
+ '卡雷吉别墅 Villa di Careggi':['Villa di Careggi 预约 攻略','D4 下午15:00','约1小时','美第奇家族早期住所；需提前预约'],
+ '卡斯特洛别墅 Villa di Castello':['Villa di Castello 花园 攻略','D4 下午16:30','约1.5小时','最美文艺复兴花园；喷泉与洞穴精美'],
+ '学院美术馆 Galleria dell\'Accademia':['学院美术馆 大卫像 预约 攻略','V4 D5 09:00','约1.5小时','🌟 V4新增：米开朗基罗《大卫》真迹；必须网上预约'],
+ '圣母百花大教堂':['佛罗伦萨大教堂 机位 攻略','V4 D5 11:00','约20–30分钟','外观+广场；登顶需另预约'],
+ '乌菲兹美术馆':['乌菲兹美术馆 预约 攻略','V4 D5 14:00','约2–2.5小时','🌟 V4充裕时间：波提切利《维纳斯的诞生》、达芬奇作品'],
+ '领主广场 + 佣兵凉廊':['领主广场 雕塑 攻略','V4 D5 16:30','约30分钟','大卫像复制品、海神喷泉'],
+ '老桥 Ponte Vecchio':['老桥 日落 攻略','V4 D5 17:30','约20–30分钟','黄金桥 shops；日落前最佳'],
+ '米开朗基罗广场 Piazzale Michelangelo':['米开朗基罗广场 日落 攻略','V4 D5 19:00','约1小时','🌟 V4新增必打卡：佛罗伦萨全景日落经典机位'],
+ '圣吉米尼亚诺｜水井广场与塔楼街景':['圣吉米尼亚诺 攻略 Dondoli','D6 中午','约20–30分钟','公共交通要经 Poggibonsi；只看主广场和塔楼街景'],
+ '锡耶纳｜贝壳广场与市政宫外观':['锡耶纳 贝壳广场 攻略','D6 下午','约20分钟','巴士下车点比火车站更接近老城'],
+ '皮恩扎与丝柏路':['皮恩扎 丝柏路 攻略 taxi','D6 日落前','约20–30分钟','公共交通末端弱；只为丝柏路订当地短途 taxi'],
+ '斗兽场 Colosseo':['斗兽场 预约 攻略','V4 D7 14:15','约1–1.5小时','🌟 罗马精华一日游核心；建议提前预约'],
+ '古罗马广场 + 帕拉蒂尼山':['古罗马广场 攻略','V4 D7 15:45','约1–1.5小时','与斗兽场联票；连续游览'],
+ '威尼斯广场/祖国祭坛':['威尼斯广场 罗马 攻略','V4 D7 17:30','约15分钟','外观打卡；白色大理石建筑'],
+ '特雷维喷泉 Trevi Fountain':['许愿池 罗马 攻略','V4 D7 18:15','约20分钟','🌟 必打卡：投币许愿是传统'],
+ '西班牙阶梯 Piazza di Spagna':['西班牙阶梯 攻略','V4 D7 19:00','约20分钟','🌟 必打卡：坐在阶梯上是经典机位'],
+ '万神殿 Pantheon':['万神殿 罗马 攻略','V4 D7 19:45','约20–30分钟','🌟 必打卡：古代世界最大无支撑混凝土穹顶'],
+ '纳沃纳广场 Piazza Navona':['纳沃纳广场 夜景 攻略','V4 D7 21:00','约30分钟','🌟 必打卡：夜间四河喷泉格外美丽'],
+ '梵蒂冈博物馆与西斯廷礼拜堂':['梵蒂冈博物馆 预约 攻略','V4 D8 08:30','约2.5–3.5小时','必须预约；西斯廷礼拜堂在博物馆动线内'],
+ '圣彼得大教堂与广场':['圣彼得大教堂 登顶 攻略','V4 D8 12:00','约1–2小时','登顶排队和体力不确定'],
+ '圣天使堡 Castel Sant\'Angelo':['圣天使堡 罗马 攻略','V4 D8 可选','约1小时','从梵蒂冈步行5分钟；天台视野极佳'],
+ '菲乌米奇诺机场':['FCO 机场 Leonardo Express 攻略','按航班倒推','—','把市区活动止损在 Termini']
+};
+
+// 添加日期到标题
+itinerary.forEach(day=>{day.title=`${dayDates[day.day]}｜${day.title}`});
+
+function dossierFor(city){return cityDossiers[city]||{route:'围绕住宿、车站与景点按顺路线步行；以预约和实时交通为准。',items:['查看当天预约、天气、罢工与末班信息；价格和开放时间以官网为准。']}}
+function cityDossier(city){const d=dossierFor(city);return `<div class="city-dossier"><b>🔎 ${esc(city)}｜深度攻略与避坑</b><div><b>顺路动线：</b>${esc(d.route)}</div><ul>${d.items.map(item=>`<li>${esc(item)}</li>`).join('')}</ul></div>`}
+function guideFor(stop){const g=guideBook[stop.name]||[`${stop.name} 小红书 攻略`, '尽量避开正午和旅行团高峰', '30–60分钟', '按当日天气、预约与现场人流调整'];return {xhs:g[0],best:g[1],stay:g[2],tip:g[3]}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function icon(kind){return L.divIcon({className:'',html:`<div class="${kind}-pin">${kind==='hotel'?'★':kind==='food'?'🍴':'●'}</div>`,iconSize:[28,28],iconAnchor:[14,14]})}
+function storyFor(stop){return attractionStories[stop.name]}
+function storyContent(story,city,planNote){return `<div class="story-image-wrap"><img class="story-image" src="${safeUrl(story.imageUrl)}" alt="${esc(story.imageAlt)}" onerror="this.closest('.story-image-wrap').remove()"><a class="story-credit" href="${safeUrl(story.imageSourceUrl)}" target="_blank" rel="noopener noreferrer">图片：${esc(story.imageSourceLabel)}</a></div><p><b>地位 / 看点：</b>${esc(story.standing)}</p><p><b>历史脉络：</b>${esc(story.history)}</p><p><b>重点看什么：</b>${esc(story.highlights)}</p>${planNote?`<p class="story-plan"><b>本程安排：</b>${esc(planNote)}</p>`:''}<p><a href="${safeUrl(story.sourceUrl)}" target="_blank" rel="noopener noreferrer">资料：${esc(story.sourceLabel)}</a></p>`}
+function storyPopup(stop,city){const story=storyFor(stop);if(!story)return `<b>${esc(stop.name)}</b><br><small>${esc(city)}｜${esc(stop.note||'')}</small>`;return `<article class="story-popup"><h3>${esc(stop.name)}</h3><div class="story-city">${esc(city)}</div>${storyContent(story,city,stop.note)}</article>`}
+function storyKey(city,name){return `${city}|${name}`}
+function safeUrl(url){return /^https:\/\//.test(url)?url:'#'}
+function rankMarkerKey(city,index){return `${city}|${index}`}
+function rankingPopup(city,item,index){return `<b>${index+1}. ${esc(item.name)}</b><br><span class="rank-tag">${esc(item.label)}</span> ${esc(item.dish)}<br><small>${esc(city)}｜适合：${esc(item.timing)}<br>${esc(item.note)}<br>来源：<a href="${safeUrl(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(item.sourceLabel)}</a></small>`}
+const attractionStatus={included:{label:'✓ 已纳入',symbol:'★'},optional:{label:'△ 可选',symbol:'◆'},skipped:{label:'○ 本次未纳入',symbol:'○'}};
+function attractionRankKey(city,index){return `${city}|${index}`}
+function attractionRankIcon(status){const meta=attractionStatus[status];return L.divIcon({className:'',html:`<div class="attraction-rank-pin ${status}">${meta.symbol}</div>`,iconSize:[24,24],iconAnchor:[12,12]})}
+function attractionPopup(city,item,index){const meta=attractionStatus[item.status];const story=attractionStories[item.name];const extra=story?`<div class="story-popup">${storyContent(story,city,item.note)}</div>`:'';return `<b>${index+1}. ${esc(item.name)}</b><br><span class="status-tag ${esc(item.status)}">${meta.label}</span><br><small>${esc(city)}｜${esc(item.note)}<br>来源：<a href="${safeUrl(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(item.sourceLabel)}</a></small>${extra}`}
+function heritageIcon(kind){const meta=heritageKindMeta[kind];return L.divIcon({className:'',html:`<div class="heritage-pin ${esc(kind)}">${meta.symbol}</div>`,iconSize:[26,26],iconAnchor:[13,13]})}
+function heritagePopup(item){const meta=heritageKindMeta[item.kind],state=item.status==='included'?'本程已覆盖':'关联体验 / 背景标记';return `<b>${esc(item.name)}</b><br><span class="heritage-kind ${esc(item.kind)}">${esc(meta.label)}</span> <span class="status-tag ${item.status==='included'?'included':'optional'}">${state}</span><br><small>${esc(item.day)}｜${esc(item.city)}<br>${esc(item.note)}<br>来源：<a href="${safeUrl(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(item.sourceLabel)}</a></small>`}
+function intercityPopup(route){return `<b>${esc(route.day)}｜${esc(route.from)} → ${esc(route.to)}</b><br><small>🚆 ${esc(route.mode)}<br><b>建议出发：</b>${esc(route.depart)}　<b>预计抵达：</b>${esc(route.arrive)}<br>⏱ ${esc(route.duration)}　💶 ${esc(route.price)}<br><b>风险：</b>${esc(route.risk)}<br>🎫 <b>官方订票：</b><a href="${safeUrl(route.bookingUrl)}" target="_blank" rel="noopener noreferrer">${esc(route.booking)}</a></small>`}
+function midpoint(path){const first=path[0],last=path[path.length-1];return[(first[0]+last[0])/2,(first[1]+last[1])/2]}
+function transportCard(t){if(!t)return'';const heading=t.label?`🚩 ${esc(t.label)}｜`:'🚆 跨城/换城交通｜';return `<div class="transport-card"><b>${heading}${esc(t.from)}｜${esc(t.mode)}</b>${esc(t.note)}<div class="meta">⏱ ${esc(t.duration)}　💶 ${esc(t.price)}　🎫 ${esc(t.booking)}</div><div class="fastest">⚡ <b>最快公共交通：</b>${esc(t.fastest||`优先 ${t.mode}；当日选少换乘、总时长最短的班次。`)}</div></div>`}
+function walkCard(plan){if(!plan)return'';return `<div class="walk-card"><b>👟 步行总量：${esc(plan.target)} <span>｜舒适上限：${esc(plan.limit)}</span></b>${esc(plan.segments)}<small>减负策略：${esc(plan.relief)}</small></div>`}
+function mealCard(items){if(!items?.length)return'';return `<div class="meal-card"><b>🍽 当日餐饮动线｜午餐、晚餐与沿途特色小吃</b><div class="meal-list">${items.map(item=>`<div class="meal-item"><strong>${esc(item.slot)}｜${esc(item.city)}</strong><br>${esc(item.place)}：${esc(item.dish)}<small>${esc(item.note)}</small></div>`).join('')}</div></div>`}
+function attraction(stop,index,city){const food=stop.food?`<div class="food-row">🍴 <b>${esc(stop.food.name)}</b>｜${esc(stop.food.note)}<br><small>用餐节奏：午餐约13:00–14:30；晚餐建议20:30后，热门店先预约。</small></div>`:'';const g=guideFor(stop);const story=stop.type==='food'?null:storyFor(stop);const guide=`<div class="guide-grid"><div><b>小红书检索关键词</b>${esc(g.xhs)}</div><div><b>建议时段 / 停留</b>${esc(g.best)}｜${esc(g.stay)}</div><div class="wide"><b>攻略要点</b>${esc(g.tip)}</div></div>`;const teaser=story?`<div class="story-teaser"><b>景点地位：</b>${esc(story.standing)}<br><button class="story-open" type="button">🖼 查看历史与主图</button></div>`:'';const data=story?` data-story-name="${esc(stop.name)}" data-story-city="${esc(city)}" data-story-note="${esc(stop.note)}"`:'';return `<div class="attraction ${stop.type==='food'?'food':''}" data-lat="${stop.lat}" data-lng="${stop.lng}"${data}><button class="attraction-toggle" aria-expanded="false"><span class="seq">${index+1}</span><span class="name">${esc(stop.name)}</span><span class="time">${esc(stop.time)}</span></button><div class="detail">${esc(stop.note)}${guide}${teaser}${food}</div></div>`}
+function cityPanel(city){const hotel=city.hotel?`<div class="hotel-badge" data-lat="${city.hotel.lat}" data-lng="${city.hotel.lng}"><b>★ 住宿：${esc(city.hotel.name)}</b><small>${esc(city.hotel.note)}</small></div>`:'';const pts=city.stops.map(s=>`${s.lat},${s.lng}`).join(';');return `<article class="city-panel"><button class="city-toggle" aria-expanded="false" data-points="${pts}">${esc(city.city)} <span>${city.stops.length} 个景点　⌄</span></button><div class="city-body">${cityDossier(city.city)}${hotel}<div class="attraction-list">${city.stops.map((s,i)=>attraction(s,i,city.city)).join('')}</div></div></article>`}
+
+// 初始化地图和渲染
+const map=L.map('map',{zoomControl:true}).setView([43.7,11.5],6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
+const layers=[];const markerKeys=new Set();const spotMarkerIndex=new Map();
+const rankFoodLayer=L.layerGroup().addTo(map);const rankFoodMarkerIndex=new Map();
+const attractionRankLayer=L.layerGroup().addTo(map);const attractionRankMarkerIndex=new Map();
+const heritageLayer=L.layerGroup().addTo(map);const heritageMarkerIndex=new Map();
+const intercityRouteLayer=L.layerGroup().addTo(map);
+
+function addPoint(item,city,kind='spot'){if(item.lat==null)return;const key=`${kind}|${item.name}`;if(markerKeys.has(key))return;markerKeys.add(key);const popup=kind==='spot'?storyPopup(item,city):`<b>${esc(item.name)}</b><br>${esc(city)}<br><small>${esc(item.note||'')}</small>`;const m=L.marker([item.lat,item.lng],{icon:icon(kind)}).addTo(map).bindPopup(popup);if(kind==='spot')spotMarkerIndex.set(storyKey(city,item.name),m);layers.push(m);return m}
+function focus(points){if(!points.length)return;map.fitBounds(L.latLngBounds(points).pad(.25),{maxZoom:14})}
+function renderMapRoutes(){const colors=['#b91c1c','#0369a1','#047857','#7c3aed','#c2410c','#a16207','#be123c','#0f766e','#334155'];let ci=0;itinerary.forEach(day=>day.cities.forEach(city=>{const points=[];if(city.hotel){addPoint(city.hotel,city.city,'hotel');points.push([city.hotel.lat,city.hotel.lng])}city.stops.forEach(s=>{addPoint(s,city.city,s.type==='food'?'food':'spot');points.push([s.lat,s.lng]);if(s.food)addPoint(s.food,city.city,'food')});if(points.length>1)L.polyline(points,{color:colors[ci++%colors.length],weight:4,opacity:.8}).addTo(map)}))}
+function setActiveFoodCity(cityName){rankFoodLayer.clearLayers();rankFoodMarkerIndex.clear();const group=foodRankings.find(item=>item.city===cityName);if(!group)return;group.items.forEach((item,index)=>{const marker=L.marker([item.lat,item.lng],{icon:icon('food')}).bindPopup(rankingPopup(group.city,item,index));marker.addTo(rankFoodLayer);rankFoodMarkerIndex.set(rankMarkerKey(group.city,index),marker)})}
+function renderFoodRanking(){const root=document.querySelector('#foodRankingList');root.innerHTML=foodRankings.map((group,gi)=>`<details class="rank-city" data-rank-city-name="${esc(group.city)}" ${gi===0?'open':''}><summary>${esc(group.city)}｜${group.items.length} 项</summary>${group.items.map((item,ii)=>`<button class="rank-row" type="button" data-rank-city="${gi}" data-rank-item="${ii}"><span class="rank-no">${ii+1}</span><b>${esc(item.name)}</b>｜${esc(item.dish)}<span class="rank-meta"><span class="rank-tag">${esc(item.label)}</span>适合：${esc(item.timing)}</span><small>${esc(item.note)}</small></button>`).join('')}</details>`).join('');root.addEventListener('toggle',e=>{const panel=e.target.closest('.rank-city');if(panel&&panel.open)setActiveFoodCity(panel.dataset.rankCityName)},true);root.addEventListener('click',e=>{const row=e.target.closest('.rank-row');if(!row)return;const group=foodRankings[+row.dataset.rankCity];const index=+row.dataset.rankItem;const item=group.items[index];setActiveFoodCity(group.city);focus([[item.lat,item.lng]]);rankFoodMarkerIndex.get(rankMarkerKey(group.city,index))?.openPopup()})}
+function setActiveAttractionCity(cityName){attractionRankLayer.clearLayers();attractionRankMarkerIndex.clear();const group=attractionRankings.find(item=>item.city===cityName);if(!group)return;group.items.forEach((item,index)=>{const marker=L.marker([item.lat,item.lng],{icon:attractionRankIcon(item.status)}).bindPopup(attractionPopup(group.city,item,index));marker.addTo(attractionRankLayer);attractionRankMarkerIndex.set(attractionRankKey(group.city,index),marker)})}
+function renderAttractionRanking(){const root=document.querySelector('#attractionRankingList');root.innerHTML=attractionRankings.map((group,gi)=>{const included=group.items.filter(item=>item.status==='included').length;return `<details class="attraction-rank-city" data-attraction-city-name="${esc(group.city)}" ${gi===0?'open':''}><summary>${esc(group.city)}｜已纳入 ${included}/10</summary>${group.items.map((item,ii)=>{const meta=attractionStatus[item.status];return `<button class="attraction-rank-row ${item.status}" type="button" data-attraction-city="${gi}" data-attraction-item="${ii}"><span class="rank-no">${ii+1}</span><b>${esc(item.name)}</b><span class="attraction-rank-meta"><span class="status-tag ${item.status}">${meta.label}</span></span><small>${esc(item.note)}</small></button>`}).join('')}</details>`}).join('');root.addEventListener('toggle',e=>{const panel=e.target.closest('.attraction-rank-city');if(panel&&panel.open)setActiveAttractionCity(panel.dataset.attractionCityName)},true);root.addEventListener('click',e=>{const row=e.target.closest('.attraction-rank-row');if(!row)return;const group=attractionRankings[+row.dataset.attractionCity];const index=+row.dataset.attractionItem;const item=group.items[index];setActiveAttractionCity(group.city);focus([[item.lat,item.lng]]);attractionRankMarkerIndex.get(attractionRankKey(group.city,index))?.openPopup()})}
+function ensureHeritageBoard(){if(document.querySelector('#heritageBoard'))return;document.querySelector('#map').insertAdjacentHTML('beforeend',`<section class="heritage-board collapsed" id="heritageBoard" data-board="heritage" aria-label="UNESCO 遗产图层"><div class="heritage-board-head"><div><b><span class="board-full-title">🏛️ UNESCO 遗产图层｜本程覆盖</span><span class="board-short-title">🏛️ 遗产</span></b><small>世界文化 / 自然 / 文化景观 / 非遗；非遗为关联体验点，不代表固定遗产边界</small></div><button class="board-toggle" type="button" aria-expanded="false">展开</button></div><div class="heritage-list" id="heritageList"></div></section>`);document.querySelector('.legend').insertAdjacentHTML('beforeend',`<div class="heritage-legend"><span class="dot" style="background:#0f766e"></span>遗产：青文化／蓝自然／紫非遗</div>`)}
+function renderHeritageBoard(){ensureHeritageBoard();const root=document.querySelector('#heritageList');root.innerHTML=heritageSites.map((item,index)=>{const meta=heritageKindMeta[item.kind],state=item.status==='included'?'本程已覆盖':'关联体验';return `<button class="heritage-row" type="button" data-heritage-index="${index}"><span class="heritage-kind ${esc(item.kind)}">${esc(meta.label)}</span><span class="status-tag ${item.status==='included'?'included':'optional'}">${state}</span><b>${esc(item.name)}</b><small>${esc(item.day)}｜${esc(item.city)}｜${esc(item.note)}</small></button>`}).join('');heritageLayer.clearLayers();heritageMarkerIndex.clear();heritageSites.forEach((item,index)=>{const marker=L.marker([item.lat,item.lng],{icon:heritageIcon(item.kind)}).bindPopup(heritagePopup(item));marker.addTo(heritageLayer);heritageMarkerIndex.set(index,marker)});root.addEventListener('click',e=>{const row=e.target.closest('.heritage-row');if(!row)return;const index=+row.dataset.heritageIndex,item=heritageSites[index];focus([[item.lat,item.lng]]);heritageMarkerIndex.get(index)?.openPopup()})}
+function setBoardExpanded(boardId,expanded){document.querySelectorAll('[data-board]').forEach(board=>{const open=expanded&&board.dataset.board===boardId;board.classList.toggle('collapsed',!open);const button=board.querySelector('.board-toggle');button.textContent=open?'收起':'展开';button.setAttribute('aria-expanded',String(open))});const rankLayers={food:rankFoodLayer,attractions:attractionRankLayer,heritage:heritageLayer};Object.entries(rankLayers).forEach(([name,layer])=>{if(expanded&&name===boardId)map.addLayer(layer);else map.removeLayer(layer)});document.querySelector('#map').dataset.openBoard=expanded?boardId:''}
+document.addEventListener('click',e=>{const button=e.target.closest('.board-toggle');if(!button)return;const board=button.closest('[data-board]');setBoardExpanded(board.dataset.board,board.classList.contains('collapsed'))})
+function renderIntercityRoutes(){intercityRouteLayer.clearLayers();intercityRoutes.forEach(route=>{const popup=intercityPopup(route);L.polyline(route.path,{color:'#2563eb',weight:3,opacity:.88,dashArray:'10 8',lineCap:'round'}).bindPopup(popup).addTo(intercityRouteLayer);const labelPoint=route.labelLocation||midpoint(route.path);L.marker(labelPoint,{interactive:true,icon:L.divIcon({className:'intercity-label',html:`<span>➜</span>${esc(route.day)}｜${esc(route.modeShort)}`,iconAnchor:[0,0]})}).bindPopup(popup).addTo(intercityRouteLayer)})}
+document.querySelector('#intercityToggle').addEventListener('click',e=>{const visible=map.hasLayer(intercityRouteLayer);if(visible)map.removeLayer(intercityRouteLayer);else map.addLayer(intercityRouteLayer);e.currentTarget.textContent=visible?'显示':'隐藏';e.currentTarget.setAttribute('aria-pressed',String(!visible))})
+function renderItinerary(){const root=document.querySelector('#itinerary');root.innerHTML=itinerary.map((day,i)=>`<section class="day-section ${i===0?'open':''}"><button class="day-toggle" aria-expanded="${i===0}"><span>${day.day} · ${esc(day.title)}</span><small>${day.cities.length} 城市　⌄</small></button><div class="day-body">${transportCard(startTransport[day.day])}${walkCard(walkPlans[day.day])}${mealCard(mealPlans[day.day])}${day.cities.map(city=>`${transportCard(city.transport)}${cityPanel(city)}`).join('')}</div></section>`).join('');root.addEventListener('click',e=>{const day=e.target.closest('.day-toggle');if(day){const s=day.parentElement;s.classList.toggle('open');day.setAttribute('aria-expanded',s.classList.contains('open'));return}const city=e.target.closest('.city-toggle');if(city){const p=city.parentElement;p.classList.toggle('open');city.setAttribute('aria-expanded',p.classList.contains('open'));const pts=city.dataset.points.split(';').filter(Boolean).map(x=>x.split(',').map(Number));focus(pts);return}const storyButton=e.target.closest('.story-open');if(storyButton){const p=storyButton.closest('.attraction');showStory({name:p.dataset.storyName,note:p.dataset.storyNote,lat:+p.dataset.lat,lng:+p.dataset.lng},p.dataset.storyCity);return}const a=e.target.closest('.attraction-toggle');if(a){const p=a.parentElement;p.classList.toggle('open');a.setAttribute('aria-expanded',p.classList.contains('open'));focus([[+p.dataset.lat,+p.dataset.lng]]);if(p.dataset.storyName)showStory({name:p.dataset.storyName,note:p.dataset.storyNote,lat:+p.dataset.lat,lng:+p.dataset.lng},p.dataset.storyCity);return}const h=e.target.closest('.hotel-badge');if(h)focus([[+h.dataset.lat,+h.dataset.lng]])})}
+function showStory(stop,city){const marker=spotMarkerIndex.get(storyKey(city,stop.name));if(!marker)return;focus([[+stop.lat,+stop.lng]]);marker.setPopupContent(storyPopup(stop,city));marker.openPopup()}
+
+// 初始化渲染
+renderFoodRanking();renderAttractionRanking();renderHeritageBoard();setActiveFoodCity(foodRankings[0].city);setActiveAttractionCity(attractionRankings[0].city);
+map.removeLayer(rankFoodLayer);map.removeLayer(attractionRankLayer);map.removeLayer(heritageLayer);
+renderMapRoutes();renderIntercityRoutes();renderItinerary();
+</script>
+</body>
+</html>
